@@ -73,7 +73,7 @@ public class Knopki : MonoBehaviour
             GetComponent<GT>().Hero.GetComponent<Zacep>().otpalWall();
             if(GetComponent<GT>().Hero.GetComponent<Hero>().TrigPolP != null && GetComponent<GT>().Hero.GetComponent<Hero>().Lestnica == null)
             {
-                GetComponent<GT>().Hero.GetComponent<Hero>().PolP1 = GetComponent<GT>().Hero.GetComponent<Hero>().TrigPolP;
+               // GetComponent<GT>().Hero.GetComponent<Hero>().PolP1 = GetComponent<GT>().Hero.GetComponent<Hero>().TrigPolP;
                 GetComponent<GT>().Hero.layer = 11;
             }
         }//Нажали кнопку вниз и держим

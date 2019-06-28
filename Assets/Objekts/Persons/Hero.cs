@@ -4,21 +4,24 @@ using System.Collections;
 public class Hero : MonoBehaviour
 {
     public float Zacep;//сила зацепа
-    public Vector2 Xy;//Координаты персонажа в момен таксания
+    public float powerUpPer;//Максимальная сила прыжка в сторону
+    public int speedH;//скорость героя
+    public float speedUp;//Скорость с которой персонаж прыгает
+    public float HeightUpPer;//Высота на которую прыгает герой
     //Переменные обозначающие, что что-то касается персонажа
     public GameObject Pol = null;//Пол
     public GameObject Wall = null;//Стена
     public GameObject Lestnica = null;//Лестница
     public GameObject PolP = null;//Поверхность сквозб которую можно пройти
-    public GameObject PolP1 = null;//Объект для проверки тот же или нет
+   // public GameObject PolP1 = null;//Объект для проверки тот же или нет
+    public Vector2 Xy;//Координаты персонажа в момен таксания
 
 
 
     public GameObject TrigPolP = null;//Переменная, показывающая стоит ли нижний на лестнице или нет
     public bool Up = false;//Переменная, говорящая о том, что персонаж в прыжке
 
-    public float powerUpPer;//Максимальная сила прыжка в сторону
-    public int speedH;//скорость героя
+  
                       // Use this for initialization
     void Start()
     {
@@ -26,6 +29,7 @@ public class Hero : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D c)//Метод столкновения персонажа с чем либо
     {
+       // PolP1 = null;
         if (c.gameObject.tag == "pol")//Один раз задел пол
         {
             GetComponent<Rigidbody2D>().isKinematic = false;//Отключаем кинематику
@@ -35,13 +39,13 @@ public class Hero : MonoBehaviour
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);//Останавливаем при столкновении с землей
                 Up = false;//выключаем режим прыжка
             }
-            ProvTrigerPolP(c.gameObject);
+
         }
         if (c.gameObject.tag == "Wall")//Один раз каснулся стены
         {
             Wall = c.gameObject;//Присваеваем значение
             Xy = transform.position;//Координаты, в которых находился персонаж в момент касания
-            ProvTrigerPolP(c.gameObject);
+
         }
         if (c.gameObject.tag == "Lestnica")//Один раз каснулся лесницы
         {
@@ -52,7 +56,7 @@ public class Hero : MonoBehaviour
             }
             Lestnica = c.gameObject;//Присваеваем значение
             Xy = transform.position;//Координаты, в которых находился персонаж в момент касания
-            ProvTrigerPolP(c.gameObject);
+
         }
         if (c.gameObject.tag == "PolP")//Один раз задел полП
         {
@@ -68,6 +72,7 @@ public class Hero : MonoBehaviour
     }
     private void OnCollisionStay2D(Collision2D co)//Метод непрерывного касания
     {
+        
         if (co.gameObject.tag == "Wall")//Каснулись стены
         {
             Wall = co.gameObject;//Присваеваем значение
@@ -118,15 +123,7 @@ public class Hero : MonoBehaviour
     }
     // Update is called once per frame
 
-    void ProvTrigerPolP(GameObject VB)
-    {
-        if(VB != PolP1)
-        {
-            Debug.Log(VB + "ffff" + Time.time);
-           // PolP1 = null;
-          //  gameObject.layer = 9;
-        }
-    }
+
     void Update()
     {
         if (TrigPolP != null)

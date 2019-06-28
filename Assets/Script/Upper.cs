@@ -34,7 +34,7 @@ public class Upper : MonoBehaviour {
             NachXY = transform.position;//Запоминаем начальные кординаты положения
             s = true;//Переменная для запуска прыжка в update
             naprA = napr;//Передаем значение направления
-            Padenie = 100;
+            Padenie = GetComponent<Hero>().speedUp;
         }
         if (GetComponent<Hero>().Wall != null)//Если приципились к стене
         {
@@ -70,7 +70,7 @@ public class Upper : MonoBehaviour {
 
                 if (GetComponent<Hero>().Pol == null || GetComponent<Hero>().PolP == null)
                 {
-                    if (transform.position.y > NachXY.y + GetComponent<RectTransform>().sizeDelta.y/3)
+                    if (transform.position.y > NachXY.y + GetComponent<Hero>().HeightUpPer)
                     {
                         s = false;
                         GetComponent<Hero>().Up = true;
