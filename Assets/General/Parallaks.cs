@@ -6,21 +6,18 @@ using UnityEngine.UI;
 public class Parallaks : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float speed = 0; //эта публичная переменная отобразится в инспекторе, там же мы ее можем и менять. Это очень удобно, чтобы настроить скорость разным слоям картинки
-    float pos = 0; //переменная для позиции картинки
-    private RawImage image; //создаем объект нашей картинки
+    public GameObject Target;//Цель, относительно которой скорость и регулируем
+    Vector2 PosOld;//Старая позиция
+    public float SpeedPar;//Переменная отвечающая за скорость паралакса
 
     void Start()
     {
-        image = GetComponent<RawImage>();//в старте получаем ссылку на картинку
+        PosOld = Target.transform.position;
     }
 
     void Update()
     {
-        //в апдейте прописываем как, с какой скоростью и куда мы будем двигать нашу картинку
-        pos += speed;
-        if (pos > 1.0F)
-            pos -= 1.0F;
-        image.uvRect = new Rect(pos, 0, 1, 1);
+        transform.position = new Vector2(transform.position.x +(PosOld.x - Target.transform.position.x) *SpeedPar,transform.position.y +(PosOld.y - Target.transform.position.y)*SpeedPar);
+            PosOld = Target.transform.position;
     }
 }
