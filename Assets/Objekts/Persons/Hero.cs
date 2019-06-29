@@ -126,7 +126,7 @@ public class Hero : MonoBehaviour
 
     void Update()
     {
-        if (TrigPolP != null)
+        if (TrigPolP != null || Up == true)
         {
             gameObject.layer = 9;
         }

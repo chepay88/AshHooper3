@@ -19,7 +19,7 @@ public class Knopki : MonoBehaviour
     {
         if (Input.GetKey(RiteK))
         {
-            if (GetComponent<GT>().Hero.GetComponent<Hero>().Pol != null || GetComponent<GT>().Hero.GetComponent<Hero>().PolP != null)
+            if (GetComponent<GT>().Hero.GetComponent<Hero>().Pol != null || GetComponent<GT>().Hero.GetComponent<Hero>().PolP != null )
             {
                 GetComponent<GT>().Hero.GetComponent<Upper>().PowerUpV(1);
             }

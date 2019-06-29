@@ -28,7 +28,8 @@ public class Upper : MonoBehaviour {
     }
     public void UpUp(int napr)
     {
-        if (GetComponent<Hero>().Pol != null || GetComponent<Hero>().Lestnica != null || GetComponent<Hero>().PolP != null)//Если стоим на полу или лестнице
+        gameObject.layer = 11;
+        if (GetComponent<Hero>().Pol != null || GetComponent<Hero>().Lestnica != null || GetComponent<Hero>().PolP != null || GetComponent<Hero>().TrigPolP != null)//Если стоим на полу или лестнице
         {
             GetComponent<Hero>().Up = true;//Присваеваем герою статус прыжка
             NachXY = transform.position;//Запоминаем начальные кординаты положения
@@ -66,6 +67,7 @@ public class Upper : MonoBehaviour {
         {
             if (Padenie > 10)
             {
+                
                 GetComponent<Rigidbody2D>().velocity = new Vector2(10 * naprA * PowerUp, Padenie);
 
                 if (GetComponent<Hero>().Pol == null || GetComponent<Hero>().PolP == null)
