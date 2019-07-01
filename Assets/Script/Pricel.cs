@@ -4,6 +4,7 @@ using UnityEngine;
 //Все связаное с прицелом
 public class Pricel : MonoBehaviour
 {
+    public GameObject GunModelText;//Текстура
     int a;//Переменная для нахождения направления курсора
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,7 @@ public class Pricel : MonoBehaviour
         {
             a = -1;
         }
-        transform.GetChild(0).GetChild(0).transform.eulerAngles = new Vector3(0f, 0f, angle*a);//Направляем оружие на курсор
+        GunModelText.transform.eulerAngles = new Vector3(0f, 0f, angle*a);//Направляем оружие на курсор
  
     }
 }
