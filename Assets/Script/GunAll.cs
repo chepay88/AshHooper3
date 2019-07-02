@@ -23,8 +23,9 @@ public class GunAll : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             GameObject Waipoin = Instantiate(transform.GetChild(1).gameObject, transform.position, transform.rotation) as GameObject;
-            Waipoin.SetActive(true);
             Waipoin.transform.SetParent(gameObject.transform.parent.parent.parent.parent);
+            Waipoin.SetActive(true);
+ 
         }
     }
 }

@@ -3,6 +3,8 @@ using System.Collections;
 
 public class GT : MonoBehaviour {
     public GameObject Hero;//ссылка на го героя
+    public GameObject WaipoinsPull;// Ссылка на пул патронов и снарядов
+    public int WaipoinsPullKol;//Количество снарядов в пулле
 	// Use this for initialization
 	void Start () {
 	
