@@ -8,15 +8,82 @@ public class Knopki : MonoBehaviour
     public KeyCode Up;//Прыжок
     public KeyCode Vverh;// Движение вверх по лестнице
     public KeyCode Niz;//Движение в низ
+    public KeyCode Fire;//Стрельба, удар
+    public KeyCode Perezaryd;//Клавиша перезарядки патронов
+
+    GT GTQ;
+    PersonsS PeRs;
     // Use this for initialization
     void Start()
     {
-
+        GTQ = GetComponent<GT>();
+        PeRs = GTQ.Hero.GetComponent<PersonsS>();
     }
 
     // Update is called once per frame
     void Update()
     {
+ 
+
+            if (Input.GetKey(LeftK))
+            {
+                PeRs.RunPerson(-1);
+            }
+            if (Input.GetKey(RiteK))
+            {
+                PeRs.RunPerson(1);
+            }
+
+        if (Input.GetKeyUp(LeftK))
+        {
+            PeRs.RunStop();
+            if (Input.GetKeyDown(Up))
+            {
+                PeRs.VklDjump();
+            }
+        }
+        if (Input.GetKeyUp(RiteK))
+        {
+            PeRs.RunStop();
+            if (Input.GetKeyDown(Up))
+            {
+                PeRs.VklDjump();
+            }
+        }
+        if (Input.GetKeyDown(Up))
+        {
+            PeRs.VklDjump();
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Debug.Log(GTQ.Hero.GetComponent<Rigidbody2D>().velocity);
+        }
+        if (Input.GetKey(Vverh))
+        {
+            PeRs.LestnicaUpDown(1);
+        }
+        if (Input.GetKey(Niz))
+        {
+            PeRs.SpuskVniz();
+            PeRs.LestnicaUpDown(-1);
+        }
+        if (Input.GetKeyUp(Vverh))
+        {
+            PeRs.LestnicaOff();
+        }
+        if (Input.GetKeyUp(Niz))
+        {
+            PeRs.LestnicaOff();
+        }
+        if(Input.GetKeyDown(Fire))
+        {
+            GTQ.Hero.transform.GetChild(0).GetChild(4).gameObject.GetComponent<RukaPersons>().StrikeGuns();
+        }
+        if (Input.GetKeyDown(Perezaryd))
+        {
+            GTQ.Hero.transform.GetChild(0).GetChild(4).gameObject.GetComponent<RukaPersons>().PerezarydMagaz();
+        }
+        /*
         if (Input.GetKey(RiteK))
         {
             if (GetComponent<GT>().Hero.GetComponent<Hero>().Pol != null || GetComponent<GT>().Hero.GetComponent<Hero>().PolP != null )
@@ -84,6 +151,6 @@ public class Knopki : MonoBehaviour
         if (Input.GetKeyUp(Niz))
         {
             GetComponent<GT>().Hero.GetComponent<Dvigenie>().dvigKstop(0, 0);
-        }//Отпустили кнопкувниз
+        }//Отпустили кнопкувниз*/
     }
 }

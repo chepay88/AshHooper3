@@ -60,7 +60,7 @@ public class Dvigenie : MonoBehaviour {
         WA.XYZ = new Vector2(ASD.x - Gun.transform.position.x, ASD.y - Gun.transform.position.y);
         WA.NachDlina = Mathf.Abs(WA.XYZ.magnitude - WaipoinsFire.transform.position.magnitude);
         WA.Dalnost = 1000;
-        WA.speedW = 60000;
+        WA.speedW = 30000;
         WaipoinsFire.SetActive(true);
        // Debug.Log(WaipoinsFire);
     }

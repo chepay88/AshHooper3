@@ -5,10 +5,15 @@ using UnityEngine;
 public class WaiponsAll : MonoBehaviour
 {
     public int TipW;//Тип патронов
-    public float DamageW;//Урон
+    public int TipStihW;//Тип стихии патрона
+    public Vector2 DamageW;//Урон
     public float speedW;//Скорость патрона
     public float Dalnost;//Дальность полета пули
+
+    public Vector2 Nac;
     public float NachDlina;//Точка начала отсчета
+
+
     public Vector2 XYZ;
 
     // Start is called before the first frame update
@@ -18,14 +23,15 @@ public class WaiponsAll : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+       // Debug.Log(collision);
         if (collision.gameObject.layer != 0)
         {
             gameObject.SetActive(false);
-            Debug.Log(collision);
         }
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
+        //Debug.Log(collision);
         if (collision.gameObject.layer != 0)
         {
             gameObject.SetActive(false);
@@ -34,9 +40,9 @@ public class WaiponsAll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Mathf.Abs(transform.position.magnitude) - NachDlina < Dalnost)
+        if(Mathf.Sqrt(Mathf.Abs(Nac.x - transform.position.x)+ Mathf.Abs(Nac.x - transform.position.y))<Dalnost)
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(XYZ.normalized.x * speedW * Time.deltaTime, XYZ.normalized.y * speedW * Time.deltaTime);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(XYZ.normalized.x * speedW*1000*Time.deltaTime, XYZ.normalized.y * speedW * 1000 * Time.deltaTime);
         }
         else
         {
