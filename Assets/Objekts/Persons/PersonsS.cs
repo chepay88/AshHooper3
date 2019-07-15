@@ -5,9 +5,9 @@ using UnityEngine;
 public class PersonsS : MonoBehaviour
 {//Вся информация о персанаже самом. Как редактируемая так и техническая
     //Параметры персонажа
-    [HideInInspector]
+   // [HideInInspector]
     public bool LeftRight;//Куда повеернуты, 1 - право, 0 лево
-    [HideInInspector]
+   // [HideInInspector]
     public bool UpDown;//Положение падаем или прыгаем 0 - падаем, 1 прыгаем
     [HideInInspector]
     public bool LestnicaOn;//Положение на лестнице
@@ -42,7 +42,7 @@ public class PersonsS : MonoBehaviour
     PersonsControl PeS;
     float NaprL;//Показывает направление на лестнице
     //Чего касаемся
-    [HideInInspector]
+    //[HideInInspector]
     public GameObject NPol = null;//Пол, коснулись ногами
     [HideInInspector]
     public GameObject VPol = null;//Пол, коснулись головой
@@ -54,9 +54,9 @@ public class PersonsS : MonoBehaviour
     public GameObject RWall = null;//Правым боком каснулись стены
     [HideInInspector]
     public GameObject LWall = null;//Левым боком каснулись стены
-    [HideInInspector]
+    //[HideInInspector]
     public GameObject NLestnica = null;//Стоим на лестнице
-    [HideInInspector]
+    //[HideInInspector]
     public GameObject NBox = null;//Стоим на ящике
     // Start is called before the first frame update
 

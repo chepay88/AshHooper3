@@ -23,8 +23,6 @@ public class Knopki : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
- 
-
             if (Input.GetKey(LeftK))
             {
                 PeRs.RunPerson(-1);
@@ -77,7 +75,7 @@ public class Knopki : MonoBehaviour
         }
         if(Input.GetKeyDown(Fire))
         {
-            GTQ.Hero.transform.GetChild(0).GetChild(4).gameObject.GetComponent<RukaPersons>().StrikeGuns();
+           // GTQ.Hero.transform.GetChild(0).GetChild(4).gameObject.GetComponent<RukaPersons>().StrikeGuns();
         }
         if (Input.GetKeyDown(Perezaryd))
         {

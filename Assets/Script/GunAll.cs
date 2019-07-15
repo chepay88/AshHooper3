@@ -27,7 +27,9 @@ public class GunAll : MonoBehaviour
     public float TimePerezarGun;//Время перезарядки
     [Header("Скорость полета пули")]
     public float SpeedWaipoins;//Скорость полета пули
-    
+
+    public GameObject GG;
+    public float Priklad;//Думаю хдесь это край приклада
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,15 @@ public class GunAll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            GameObject II = transform.GetChild(1).gameObject;
+            GameObject IO = transform.GetChild(0).gameObject;
+            float G = Mathf.Sqrt(Mathf.Pow(IO.transform.position.x - II.transform.position.x, 2) + Mathf.Pow(IO.transform.position.y - II.transform.position.y,2));
+            //Vector2 CV = new Vector2(transform.position.x + Mathf.Cos(transform.eulerAngles.z) * transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size.x / -2, transform.position.y + Mathf.Sin(transform.eulerAngles.z) * transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size.x / -2);
+            //GameObject JJ = Instantiate(GG, CV, transform.rotation) as GameObject;
+            // Debug.Log(transform.eulerAngles + "M<" + transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size);
+            Debug.Log(G);
+        }
     }
 }

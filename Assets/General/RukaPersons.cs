@@ -25,8 +25,8 @@ public class RukaPersons : MonoBehaviour
     }
     void ZapisUIText(GameObject UIT, string TextU, Color Colp)//Метод отображения текста в UI
     {
-        UIT.GetComponent<Text>().text = TextU;
-        UIT.GetComponent<Text>().color = Colp;
+       // UIT.GetComponent<Text>().text = TextU;
+       // UIT.GetComponent<Text>().color = Colp;
     }
     public void StrikeGuns()//Выстрел из оружия
     {
@@ -54,13 +54,13 @@ public class RukaPersons : MonoBehaviour
     }
     public void OtobragIkonGun()//Метод отображения оружия в UI
     {
-        Vector2 XYS = transform.GetChild(0).GetChild(0).gameObject.GetComponent<RectTransform>().sizeDelta;
-        XYS = new Vector2(XYS.x * 2, XYS.y * 2);
-        Vector2 XY = new Vector2(XYS.x / 2 +40, XYS.y /2+40);
-        RukaUIInfo.GetComponent<RawImage>().texture = transform.GetChild(0).GetChild(0).gameObject.GetComponent<RawImage>().texture;
-        RukaUIInfo.transform.transform.position = XY;
-        RukaUIInfo.GetComponent<RectTransform>().sizeDelta = XYS;
-        ZapisUIText(RukaUIInfo.transform.GetChild(1).gameObject, transform.GetChild(0).gameObject.GetComponent<GunAll>().NameGun, Color.red);
+      //  Vector2 XYS = transform.GetChild(0).GetChild(0).gameObject.GetComponent<RectTransform>().sizeDelta;
+      //  XYS = new Vector2(XYS.x * 2, XYS.y * 2);
+      //  Vector2 XY = new Vector2(XYS.x / 2 +40, XYS.y /2+40);
+      //  RukaUIInfo.GetComponent<RawImage>().texture = transform.GetChild(0).GetChild(0).gameObject.GetComponent<RawImage>().texture;
+      //  RukaUIInfo.transform.transform.position = XY;
+      //  RukaUIInfo.GetComponent<RectTransform>().sizeDelta = XYS;
+     //  ZapisUIText(RukaUIInfo.transform.GetChild(1).gameObject, transform.GetChild(0).gameObject.GetComponent<GunAll>().NameGun, Color.red);
     }
     public void WaipoinsUIOtobr(GameObject Gun, int WaipoinDelta)//Отображаем количество патронов
     {
