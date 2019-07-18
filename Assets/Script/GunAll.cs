@@ -47,7 +47,7 @@ public class GunAll : MonoBehaviour
             //Vector2 CV = new Vector2(transform.position.x + Mathf.Cos(transform.eulerAngles.z) * transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size.x / -2, transform.position.y + Mathf.Sin(transform.eulerAngles.z) * transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size.x / -2);
             //GameObject JJ = Instantiate(GG, CV, transform.rotation) as GameObject;
             // Debug.Log(transform.eulerAngles + "M<" + transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size);
-            Debug.Log(G);
+            Debug.Log(transform.eulerAngles);
         }
     }
 }
