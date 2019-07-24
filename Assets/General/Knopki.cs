@@ -58,19 +58,23 @@ public class Knopki : MonoBehaviour
         }
         if (Input.GetKey(Vverh))
         {
+            PeRs.StepPersZ(1);
             PeRs.LestnicaUpDown(1);
         }
         if (Input.GetKey(Niz))
         {
+            PeRs.StepPersZ(-1);
             PeRs.SpuskVniz();
             PeRs.LestnicaUpDown(-1);
         }
         if (Input.GetKeyUp(Vverh))
         {
+            PeRs.StepZStop();
             PeRs.LestnicaOff();
         }
         if (Input.GetKeyUp(Niz))
         {
+            PeRs.StepZStop();
             PeRs.LestnicaOff();
         }
         if(Input.GetKeyDown(Fire))

@@ -11,6 +11,36 @@ public class CollisionTriger : MonoBehaviour
     {
         PeS = transform.parent.parent.gameObject.GetComponent<PersonsS>();
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (gameObject.name == "Niz")
+        {
+            if (collision.gameObject.tag == "pol")
+            {
+                PeS.NPol = collision.gameObject;
+                PeS.PadenieSv.y = 0;
+            }
+            if (collision.gameObject.tag == "PolP")
+            {
+                PeS.NBox = collision.gameObject;
+                PeS.PadenieSv.y = 0;
+            }
+        }
+        }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (gameObject.name == "Niz")
+        {
+            if (collision.gameObject.tag == "pol")
+            {
+                PeS.NPol = null;
+            }
+            if (collision.gameObject.tag == "PolP")
+            {
+                PeS.NBox = null;
+            }
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (gameObject.name == "Niz")

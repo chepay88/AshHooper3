@@ -6,22 +6,33 @@ public class Dvigenie : MonoBehaviour {
     Hero HG;
     public GameObject GTZ;
     GT GTY;
-
-    void Start() {
+    Rigidbody2D RGB2;
+    private void Awake()
+    {
         GTY = GTZ.GetComponent<GT>();
         dvigK(1);
         HG = GetComponent<Hero>();
+        RGB2 = GetComponent<Rigidbody2D>();
+        
+    }
+    void Start() {
+
     }
 
     public void dvigK(int Napr)//Движение персонажа, направление - 1 право (-1) - лево
     {
-        HG = GetComponent<Hero>();
         if (HG.Pol != null || GetComponent<Hero>().Lestnica != null || GetComponent<Hero>().PolP != null)//если стоит на полу или лестнице
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(HG.speedH * Napr, 0);//Задаем скорость
+            RGB2.velocity = new Vector2(HG.speedH * Napr, RGB2.velocity.y);//Задаем скорость
         }
     }
-
+    public void dvigZ(int Napr)//Движение персонажа вдоль оси Z
+    {
+        if (HG.Pol != null)//если стоит на полу или лестнице
+        {
+            RGB2.velocity = new Vector2(RGB2.velocity.x, HG.speedH * Napr);//Задаем скорость
+        }
+    }
     public void dvigKstop(int a, int b)//Останавливаем персонажа, скорости по x и y, либо придаем скорость
     {
         if (GetComponent<Hero>().Pol != null || GetComponent<Hero>().Lestnica != null || GetComponent<Hero>().PolP != null)//Если стот на полу или лестнице

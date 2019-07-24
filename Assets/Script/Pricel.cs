@@ -31,6 +31,10 @@ public class Pricel : MonoBehaviour
                 ForPoint(point);
             }
         }
+        for (int i4 = PointL.Length; i4 >0; i4--)
+        {
+            PointL[i4 - 1].SetActive(false);
+        } 
      }
     void ForPoint(GameObject point)//Цикл, для точек
     {
@@ -52,7 +56,7 @@ public class Pricel : MonoBehaviour
             }
         }
     }
-    GameObject AnimPointPrikladChoise()
+    GameObject AnimPointPrikladChoise()//Точки анимации, движение анимации
     {
         GameObject FF = null;
         if(GunModelText.transform.GetChild(0).eulerAngles.z < 360)
