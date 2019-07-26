@@ -6,7 +6,7 @@ public class CollisionTriger : MonoBehaviour
 {
     //Скрипт для определения чего мы коснулись. Всю информацию о касании передаем в 
     PersonsS PeS;
-        // Start is called before the first frame update
+    // Start is called before the first frame update
     void Start()
     {
         PeS = transform.parent.parent.gameObject.GetComponent<PersonsS>();
@@ -17,13 +17,21 @@ public class CollisionTriger : MonoBehaviour
         {
             if (collision.gameObject.tag == "pol")
             {
-                PeS.NPol = collision.gameObject;
+                PeS.NPol2 = collision.gameObject;
                 PeS.PadenieSv.y = 0;
             }
             if (collision.gameObject.tag == "PolP")
             {
                 PeS.NBox = collision.gameObject;
                 PeS.PadenieSv.y = 0;
+            }
+            if(collision.gameObject.tag == "Perehod")
+            {
+                PeS.NPereh = collision.gameObject;
+            }
+            if (collision.gameObject.tag == "Pol1")
+            {
+                PeS.NPol1 = collision.gameObject;
             }
         }
         }
@@ -33,11 +41,19 @@ public class CollisionTriger : MonoBehaviour
         {
             if (collision.gameObject.tag == "pol")
             {
-                PeS.NPol = null;
+                PeS.NPol2 = null;
             }
             if (collision.gameObject.tag == "PolP")
             {
                 PeS.NBox = null;
+            }
+            if (collision.gameObject.tag == "Perehod")
+            {
+                PeS.NPereh = null;
+            }
+            if (collision.gameObject.tag == "Pol1")
+            {
+                PeS.NPol1 = null;
             }
         }
     }
@@ -47,8 +63,9 @@ public class CollisionTriger : MonoBehaviour
         {
             if (collision.gameObject.tag == "pol")
             {
-                PeS.NPol = collision.gameObject;
+                PeS.NPol2 = collision.gameObject;
                 PeS.PadenieSv.y = 0;
+                
             }
             if (collision.gameObject.tag == "PolP")
             {
@@ -92,7 +109,7 @@ public class CollisionTriger : MonoBehaviour
         {
             if (collision.gameObject.tag == "pol")
             {
-                PeS.NPol = collision.gameObject;
+                PeS.NPol2 = collision.gameObject;
             }
             if (collision.gameObject.tag == "PolP")
             {
@@ -135,7 +152,7 @@ public class CollisionTriger : MonoBehaviour
         {
             if (collision.gameObject.tag == "pol")
             {
-                PeS.NPol = null;
+                PeS.NPol2 = null;
             }
             if (collision.gameObject.tag == "PolP")
             {

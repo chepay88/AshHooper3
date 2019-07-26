@@ -14,7 +14,6 @@ public class Pricel : MonoBehaviour
         PointL[0].name = "1";
         PointL[1].name = "2";
         PointL[2].name = "3";
-       // Debug.Log(PointL[0].transform.position.y + "LLL" + PointL[1].transform.position.y + ";;;" + PointL[2].transform.position.y);
     }
     void ChoicePoint()//определяем какая точка выше или ниже
     {
@@ -90,9 +89,6 @@ public class Pricel : MonoBehaviour
         {
             FF = PointL[1];
         }
-
-        //  Debug.Log(FF);
-       // Debug.Log(FF.transform.position.y);
         Vector3 ASD = Camera.main.ScreenToWorldPoint(Input.mousePosition);//Положение мыши в мировых координатах
         var angle = Vector2.Angle(Vector2.right, ASD - transform.position);//угол между вектором от объекта к мыше и осью х
         if (ASD.y >= transform.position.y)//Если курсор выше серидины героя
@@ -113,7 +109,6 @@ public class Pricel : MonoBehaviour
         {
             GunModelText.transform.GetChild(0).eulerAngles = new Vector3(180, XY.y, XY.z * -1);
         }
-        Debug.Log(GunModelText.transform.GetChild(0).eulerAngles.z);
         GunModelText.transform.GetChild(0).position = FF.transform.position;
     }
     void Update()

@@ -46,11 +46,19 @@ public class PersonsS : MonoBehaviour
     PersonsControl PeS;
     float NaprL;//Показывает направление на лестнице
     bool SvPad = false;//Переменная свободного падения
+   public bool PerehodN = false;//Переход активирован или нет
+    GameObject NPolUp;//Поверхность с которой начинается прыжок
     //Чего касаемся
     //[HideInInspector]
     public GameObject NPol = null;//Пол, коснулись ногами
+  //  [HideInInspector]
+    public GameObject NPol1 = null;//Пол, , тип второй(Лестницы и тд)
+    [HideInInspector]
+    public GameObject NPol2 = null;//Пол, тип первый, просто пол
     [HideInInspector]
     public GameObject VPol = null;//Пол, коснулись головой
+   // [HideInInspector]
+    public GameObject NPereh = null;//Встали на переход
     [HideInInspector]
     public GameObject RPol = null;
     [HideInInspector]
@@ -75,6 +83,44 @@ public class PersonsS : MonoBehaviour
     {
 
     }
+void PerehodMetod()
+    {
+       /* if (NPol2 != null && NPereh != null)
+        {
+            PerehodN = true;
+        }
+        if(NPol2 != null && NPereh == null && PerehodN == true)
+        {
+            PerehodN = false;
+        }*/
+        if(NPol2 != null && NPereh != null)
+        {
+            PerehodN = true;
+        }
+        if(NPol2 != null && NPereh == null && NPol1 == null)
+        {
+            PerehodN = false;
+        }
+ 
+
+        if(PerehodN == false)
+        {
+            NPol = NPol2;
+        }
+        if(PerehodN == true && NPereh != null && NPol1 == null)
+        {
+            NPol = NPereh;
+        }
+        if(PerehodN == true && NPol1 != null)
+        {
+            NPol = NPol1;
+        }
+        if(PerehodN == true && NPol1 == null)
+        {
+            NPol = NPol1;
+        }
+
+    }
     void OpredOsZ()//Определяем положение персонажа по оси Z
     {
         if (OsZ > 10000)
@@ -83,15 +129,17 @@ public class PersonsS : MonoBehaviour
         }
         else
         {
-            if (UpDown == false)
+            if (UpDown == false &&SvPad == false)
             {
-                OsZ = Mathf.Floor(transform.position.y);
+                if (NPol != null || NBox != null || NLestnica != null)
+                {
+                    OsZ = Mathf.Floor(transform.position.y);
+                }
             }
         }
     }
     void PadenieSvob()//Свободное падение(скорость по оси x)
     {
-        //if (NPol == null && NBox == null && NLestnica == null && UpDown == false)//Если ни чего не касаемся ногами - падаем
         if (TrigerPadenie() == true)
         {
             if (PadenieSv.y + PadenieSv.w * Time.deltaTime < PadenieSv.z)
@@ -107,11 +155,13 @@ public class PersonsS : MonoBehaviour
         }
         else
         {
-            if (SvPad == true)
-            {
-                RG2.velocity = new Vector2(0, 0);
-                PadenieSv.y = 0;
-                SvPad = false;
+            if (SvPad == true) {
+                if (OsZ >= Mathf.Floor(transform.position.y) || NPolUp != NPol)
+                {
+                    RG2.velocity = new Vector2(0, 0);
+                    PadenieSv.y = 0;
+                    SvPad = false;
+                }
             }
         }
     }
@@ -192,6 +242,7 @@ public class PersonsS : MonoBehaviour
                 UpDown = true;//Статус прыжок
                 transform.GetChild(1).GetChild(0).gameObject.layer = 10;
                 JumpIk.y = 0;
+                NPolUp = NPol;
             }
         }
     }
@@ -258,6 +309,7 @@ public class PersonsS : MonoBehaviour
 
     void Update()
     {
+        PerehodMetod();
         PadenieSvob();
         NapravPers();
         JumperUp();
