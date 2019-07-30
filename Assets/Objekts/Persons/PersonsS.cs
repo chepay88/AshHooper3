@@ -46,18 +46,20 @@ public class PersonsS : MonoBehaviour
     PersonsControl PeS;
     float NaprL;//Показывает направление на лестнице
     bool SvPad = false;//Переменная свободного падения
-   public bool PerehodN = false;//Переход активирован или нет
+    public bool PerehodN = false;//Переход активирован или нет
     GameObject NPolUp;//Поверхность с которой начинается прыжок
     //Чего касаемся
     //[HideInInspector]
     public GameObject NPol = null;//Пол, коснулись ногами
-  //  [HideInInspector]
+                                  //  [HideInInspector]
     public GameObject NPol1 = null;//Пол, , тип второй(Лестницы и тд)
+    public GameObject Kray = null;//Край пола
+    public GameObject Kray1 = null;//Край пола1
     [HideInInspector]
     public GameObject NPol2 = null;//Пол, тип первый, просто пол
     [HideInInspector]
     public GameObject VPol = null;//Пол, коснулись головой
-   // [HideInInspector]
+                                  // [HideInInspector]
     public GameObject NPereh = null;//Встали на переход
     [HideInInspector]
     public GameObject RPol = null;
@@ -71,7 +73,8 @@ public class PersonsS : MonoBehaviour
     public GameObject NLestnica = null;//Стоим на лестнице
     //[HideInInspector]
     public GameObject NBox = null;//Стоим на ящике
-                                  // Start is called before the first frame update
+    public Vector3 LostPos;
+    // Start is called before the first frame update
 
     private void Awake()
     {
@@ -81,45 +84,35 @@ public class PersonsS : MonoBehaviour
     }
     void Start()
     {
-
+        LostPos  = new Vector3(-10000, -10000, -10000);
     }
-void PerehodMetod()
+    void PerehodMetod()//Метод перехода с обычного пола на лестницу
     {
-       /* if (NPol2 != null && NPereh != null)
+        if (NPol2 != null && NPereh != null && UpDown == false)
         {
             PerehodN = true;
         }
-        if(NPol2 != null && NPereh == null && PerehodN == true)
-        {
-            PerehodN = false;
-        }*/
-        if(NPol2 != null && NPereh != null)
-        {
-            PerehodN = true;
-        }
-        if(NPol2 != null && NPereh == null && NPol1 == null)
+        //
+        if (NPol2 != null && NPereh == null && NPol1 == null && UpDown == false && SvPad != true)
         {
             PerehodN = false;
         }
- 
 
-        if(PerehodN == false)
+        if (PerehodN == false && UpDown == false)
         {
             NPol = NPol2;
         }
-        if(PerehodN == true && NPereh != null && NPol1 == null)
+        else
         {
-            NPol = NPereh;
+            if (NPereh != null && UpDown == false)
+            {
+                NPol = NPereh;
+            }
+            else
+            {
+                NPol = NPol1;
+            }
         }
-        if(PerehodN == true && NPol1 != null)
-        {
-            NPol = NPol1;
-        }
-        if(PerehodN == true && NPol1 == null)
-        {
-            NPol = NPol1;
-        }
-
     }
     void OpredOsZ()//Определяем положение персонажа по оси Z
     {
@@ -129,7 +122,7 @@ void PerehodMetod()
         }
         else
         {
-            if (UpDown == false &&SvPad == false)
+            if (UpDown == false && SvPad == false)
             {
                 if (NPol != null || NBox != null || NLestnica != null)
                 {
@@ -142,21 +135,22 @@ void PerehodMetod()
     {
         if (TrigerPadenie() == true)
         {
-            if (PadenieSv.y + PadenieSv.w * Time.deltaTime < PadenieSv.z)
-            {
-                PadenieSv.y = PadenieSv.y + PadenieSv.w * Time.deltaTime;
-            }
-            else
-            {
-                PadenieSv.y = PadenieSv.z;
-            }
-            Ruzgon.y = RG2.velocity.x;
-            RG2.velocity = new Vector2(Ruzgon.y, PadenieSv.y);
+                if (PadenieSv.y + PadenieSv.w * Time.deltaTime < PadenieSv.z)
+                {
+                    PadenieSv.y = PadenieSv.y + PadenieSv.w * Time.deltaTime;
+                }
+                else
+                {
+                    PadenieSv.y = PadenieSv.z;
+                }
+                Ruzgon.y = RG2.velocity.x;
+                RG2.velocity = new Vector2(Ruzgon.y, PadenieSv.y);
         }
         else
         {
-            if (SvPad == true) {
-                if (OsZ >= Mathf.Floor(transform.position.y) || NPolUp != NPol)
+            if (SvPad == true)
+            {
+                if (OsZ >= Mathf.Floor(transform.position.y) || NPolUp != NPol && NPolUp.name != NPol.name)
                 {
                     RG2.velocity = new Vector2(0, 0);
                     PadenieSv.y = 0;
@@ -164,6 +158,7 @@ void PerehodMetod()
                 }
             }
         }
+
     }
     bool TrigerPadenie()//Проверка на касание героя к поверхности
     {
@@ -191,6 +186,24 @@ void PerehodMetod()
     }
     public void RunPerson(int Napr)//Бег персонажа
     {
+        if (Kray == null && PerehodN == false)
+        {
+            RunPersonL(Napr);
+        }
+        else
+        {
+            if (Kray1 == null && PerehodN == true)
+            {
+                RunPersonL(Napr);
+            }
+            else
+            {
+                transform.position = LostPos;
+            }
+        }
+    }
+    void RunPersonL(int Napr)
+    {
         if (NPol != null || NBox != null || NLestnica != null)
         {
             if (Mathf.Abs(Ruzgon.y) + Ruzgon.z * Time.deltaTime < Ruzgon.x)
@@ -206,14 +219,33 @@ void PerehodMetod()
                 Ruzgon.y = speedShag;
             }
             RG2.velocity = new Vector2(Ruzgon.y * Napr, RG2.velocity.y);//Задаем скорость
-
+            LostPos = transform.position;
         }
     }
     public void StepPersZ(int Napr)//Движение персонажа вдоль Z
     {
+        if (Kray == null && PerehodN == false)
+        {
+            StepPersZL(Napr);
+        }
+        else
+        {
+            if (Kray1 == null && PerehodN == true)
+            {
+                StepPersZL(Napr);
+            }
+            else
+            {
+                transform.position = LostPos;
+            }
+        }
+    }
+    void StepPersZL(int Napr)
+    {
         if (NPol != null && NLestnica == null)
         {
             RG2.velocity = new Vector2(RG2.velocity.x, Ruzgon.x * Napr * Time.deltaTime * SpeedZ);//Задаем скорость
+            LostPos = transform.position;                                                                                      // LostPosOpr();
         }
     }
     public void RunStop()//Остановка героя
@@ -233,16 +265,19 @@ void PerehodMetod()
     }
     public void VklDjump()//Начало прыжка 
     {
-        if (NPol != null || NBox != null || NLestnica != null)
+        if (PerehodN == false)
         {
-            if (UpDown == false)
+            if (NPol != null || NBox != null || NLestnica != null)
             {
-                XYUP = transform.position;//Начало рыжка координаты
-                JumpIk.x = GetComponent<Rigidbody2D>().velocity.x;//Координаты начала прыжка
-                UpDown = true;//Статус прыжок
-                transform.GetChild(1).GetChild(0).gameObject.layer = 10;
-                JumpIk.y = 0;
-                NPolUp = NPol;
+                if (UpDown == false)
+                {
+                    XYUP = transform.position;//Начало рыжка координаты
+                    JumpIk.x = GetComponent<Rigidbody2D>().velocity.x;//Координаты начала прыжка
+                    UpDown = true;//Статус прыжок
+                    transform.GetChild(1).GetChild(0).gameObject.layer = 10;
+                    JumpIk.y = 0;
+                    NPolUp = NPol;
+                }
             }
         }
     }
@@ -310,11 +345,11 @@ void PerehodMetod()
     void Update()
     {
         PerehodMetod();
-        PadenieSvob();
         NapravPers();
         JumperUp();
         StopSpusk();
         LestnicaControl();
         OpredOsZ();
+        PadenieSvob();
     }
 }

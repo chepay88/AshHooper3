@@ -20,139 +20,89 @@ public class Knopki : MonoBehaviour
         PeRs = GTQ.Hero.GetComponent<PersonsS>();
     }
 
+    public void KlickArrRiet()//Метод Нажатие клавиши впрао
+    {
+        PeRs.RunPerson(1);
+    }
+    public void KlickArrLeft()//Метод Нажатие на клавишу вправо
+    {
+        PeRs.RunPerson(-1);
+    }
+    public void UpKeyKlick()//Метод отпускания клавиши влево или вправо
+    {
+        PeRs.RunStop();
+    }
+    public void DJumpKlicKey()//Метод прыжка
+    {
+        PeRs.VklDjump();
+    }
+    public void KlickArrVverh()//Метод нажатия клавиши вверх
+    {
+        PeRs.StepPersZ(1);
+        PeRs.LestnicaUpDown(1);
+    }
+    public void KlickArrDown()//Метод нажатия клавиши вниз
+    {
+        PeRs.StepPersZ(-1);
+        PeRs.SpuskVniz();
+        PeRs.LestnicaUpDown(-1);
+    }
+    public void KlickArrVverhUp()//Метод отпускания клавиши вверх
+    {
+        PeRs.StepZStop();
+        PeRs.LestnicaOff();
+    }
+    public void KlickArrDownUP()//Метод отпускания клавиш вниз
+    {
+        PeRs.StepZStop();
+        PeRs.LestnicaOff();
+    }
     // Update is called once per frame
     void Update()
     {
-            if (Input.GetKey(LeftK))
-            {
-                PeRs.RunPerson(-1);
-            }
-            if (Input.GetKey(RiteK))
-            {
-                PeRs.RunPerson(1);
-            }
-
-        if (Input.GetKeyUp(LeftK))
+        if (Input.GetKey(LeftK))//Непосредственное нажатие на клавишу влево
         {
-            PeRs.RunStop();
-            if (Input.GetKeyDown(Up))
-            {
-                PeRs.VklDjump();
-            }
+            KlickArrLeft();
         }
-        if (Input.GetKeyUp(RiteK))
+        if (Input.GetKey(RiteK))//Непосредственное нажатие на клавишу вправо
         {
-            PeRs.RunStop();
-            if (Input.GetKeyDown(Up))
-            {
-                PeRs.VklDjump();
-            }
+            KlickArrRiet();
         }
-        if (Input.GetKeyDown(Up))
+        if (Input.GetKeyUp(LeftK))//Непосредственно отпустили клавишу влево
         {
-            PeRs.VklDjump();
+            UpKeyKlick();
         }
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyUp(RiteK))//Непосредственно отпустили клавишу вправо
         {
-            Debug.Log(GTQ.Hero.GetComponent<Rigidbody2D>().velocity);
+            UpKeyKlick();
         }
-        if (Input.GetKey(Vverh))
+        if (Input.GetKeyDown(Up))//Непосредственно нажали клавишу прыжка
         {
-            PeRs.StepPersZ(1);
-            PeRs.LestnicaUpDown(1);
+            DJumpKlicKey();
         }
-        if (Input.GetKey(Niz))
+        if (Input.GetKey(Vverh))//Непосредственное нажатие на клавишу вверх
         {
-            PeRs.StepPersZ(-1);
-            PeRs.SpuskVniz();
-            PeRs.LestnicaUpDown(-1);
+            KlickArrVverh();
         }
-        if (Input.GetKeyUp(Vverh))
+        if (Input.GetKey(Niz))//Непосредственное нажатие на клавишу вниз
         {
-            PeRs.StepZStop();
-            PeRs.LestnicaOff();
+            KlickArrDown();
         }
-        if (Input.GetKeyUp(Niz))
+        if (Input.GetKeyUp(Vverh))//Непосредственное отпускание клавиши вверх
         {
-            PeRs.StepZStop();
-            PeRs.LestnicaOff();
+            KlickArrVverhUp();
         }
-        if(Input.GetKeyDown(Fire))
+        if (Input.GetKeyUp(Niz))//Непосредственно отпустили клавишу вниз
         {
-           // GTQ.Hero.transform.GetChild(0).GetChild(4).gameObject.GetComponent<RukaPersons>().StrikeGuns();
+            KlickArrDownUP();
+        }
+        if (Input.GetKeyDown(Fire))
+        {
+            // GTQ.Hero.transform.GetChild(0).GetChild(4).gameObject.GetComponent<RukaPersons>().StrikeGuns();
         }
         if (Input.GetKeyDown(Perezaryd))
         {
             GTQ.Hero.transform.GetChild(0).GetChild(4).gameObject.GetComponent<RukaPersons>().PerezarydMagaz();
         }
-        /*
-        if (Input.GetKey(RiteK))
-        {
-            if (GetComponent<GT>().Hero.GetComponent<Hero>().Pol != null || GetComponent<GT>().Hero.GetComponent<Hero>().PolP != null )
-            {
-                GetComponent<GT>().Hero.GetComponent<Upper>().PowerUpV(1);
-            }
-            if (Input.GetKey(Up))
-            {
-                GetComponent<GT>().Hero.GetComponent<Upper>().UpUp(1);
-            }
-            else
-            {
-                GetComponent<GT>().Hero.GetComponent<Dvigenie>().dvigK(1);
-            }
-            GetComponent<GT>().Hero.GetComponent<Upper>().PadenieBlock(1);
-        }//Нажали кнопку вправо и держим
-        if (Input.GetKeyUp(RiteK))
-        {
-            GetComponent<GT>().Hero.GetComponent<Upper>().PowerUpV(0);
-            GetComponent<GT>().Hero.GetComponent<Dvigenie>().dvigKstop(0,0);
-        }//ОТпустили кнопку вправо
-        if (Input.GetKey(LeftK))
-        {
-            if (GetComponent<GT>().Hero.GetComponent<Hero>().Pol != null)
-            {
-                GetComponent<GT>().Hero.GetComponent<Upper>().PowerUpV(1);
-            }
-            if (Input.GetKey(Up))
-            {
-                GetComponent<GT>().Hero.GetComponent<Upper>().UpUp(-1);
-            }
-            else
-            {
-                GetComponent<GT>().Hero.GetComponent<Dvigenie>().dvigK(-1);
-            }
-            GetComponent<GT>().Hero.GetComponent<Upper>().PadenieBlock(-1);
-        }//Нажали кнопку влево и держим
-        if (Input.GetKeyUp(LeftK))
-        {
-            GetComponent<GT>().Hero.GetComponent<Dvigenie>().dvigKstop(0,0);
-            GetComponent<GT>().Hero.GetComponent<Upper>().PowerUpV(0);
-        }//Отпустили кнопку влево
-        if (Input.GetKeyDown(Up))
-        {
-            GetComponent<GT>().Hero.GetComponent<Upper>().UpUp(0);
-        }//Нажали кнопку прыжка
-        if (Input.GetKey(Vverh))
-        {
-            GetComponent<GT>().Hero.GetComponent<Dvigenie>().VverhLect(1);
-        }//Нажали кнопку Вверх и держим
-        if (Input.GetKey(Niz))
-        {
-            GetComponent<GT>().Hero.GetComponent<Dvigenie>().VverhLect(-1);
-            GetComponent<GT>().Hero.GetComponent<Zacep>().otpalWall();
-            if(GetComponent<GT>().Hero.GetComponent<Hero>().TrigPolP != null && GetComponent<GT>().Hero.GetComponent<Hero>().Lestnica == null)
-            {
-               // GetComponent<GT>().Hero.GetComponent<Hero>().PolP1 = GetComponent<GT>().Hero.GetComponent<Hero>().TrigPolP;
-                GetComponent<GT>().Hero.layer = 11;
-            }
-        }//Нажали кнопку вниз и держим
-        if (Input.GetKeyUp(Vverh))
-        {
-            GetComponent<GT>().Hero.GetComponent<Dvigenie>().dvigKstop(0, 0);
-        }//Отпустили кнопку вверх
-        if (Input.GetKeyUp(Niz))
-        {
-            GetComponent<GT>().Hero.GetComponent<Dvigenie>().dvigKstop(0, 0);
-        }//Отпустили кнопкувниз*/
     }
 }

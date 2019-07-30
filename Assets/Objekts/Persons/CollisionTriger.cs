@@ -33,8 +33,17 @@ public class CollisionTriger : MonoBehaviour
             {
                 PeS.NPol1 = collision.gameObject;
             }
+            if (collision.gameObject.tag == "Kray")
+            {
+                PeS.Kray = collision.gameObject;
+            }
+            if (collision.gameObject.tag == "Kray1")
+            {
+                PeS.Kray1 = collision.gameObject;
+            }
         }
         }
+        
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (gameObject.name == "Niz")
@@ -55,137 +64,27 @@ public class CollisionTriger : MonoBehaviour
             {
                 PeS.NPol1 = null;
             }
-        }
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (gameObject.name == "Niz")
-        {
-            if (collision.gameObject.tag == "pol")
+            if (collision.gameObject.tag == "Kray")
             {
-                PeS.NPol2 = collision.gameObject;
-                PeS.PadenieSv.y = 0;
-                
+                PeS.Kray = null;
             }
-            if (collision.gameObject.tag == "PolP")
+            if (collision.gameObject.tag == "Kray1")
             {
-                PeS.NBox = collision.gameObject;
-                PeS.PadenieSv.y = 0;
-            }
-        }
-        if(gameObject.name == "Verh")
-        {
-            if (collision.gameObject.tag == "pol")
-            {
-                PeS.VPol = collision.gameObject;
-            }
-        }
-        if(gameObject.name == "Right")
-        {
-            if (collision.gameObject.tag == "pol")
-            {
-                PeS.RPol = collision.gameObject;
-            }
-               if (collision.gameObject.tag == "Wall")
-             {
-               PeS.RWall = collision.gameObject;                
-             }
-        }
-        if (gameObject.name == "Left")
-        {
-            if (collision.gameObject.tag == "pol")
-            {
-                PeS.LPol = collision.gameObject;
-            }
-            if (collision.gameObject.tag == "Wall")
-            {
-                PeS.LWall = collision.gameObject;
+                PeS.Kray1 = null;
             }
         }
     }
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (gameObject.name == "Niz")
         {
-            if (collision.gameObject.tag == "pol")
+            if (collision.gameObject.tag == "Kray")
             {
-                PeS.NPol2 = collision.gameObject;
+                PeS.Kray = collision.gameObject;
             }
-            if (collision.gameObject.tag == "PolP")
+            if (collision.gameObject.tag == "Kray1" && PeS.PerehodN == true)
             {
-                PeS.NBox = collision.gameObject;
-            }
-        }
-        if (gameObject.name == "Verh")
-        {
-            if (collision.gameObject.tag == "pol")
-            {
-                PeS.VPol = collision.gameObject;
-            }
-        }
-        if (gameObject.name == "Right")
-        {
-            if (collision.gameObject.tag == "pol")
-            {
-                PeS.RPol = collision.gameObject;
-            }
-            if (collision.gameObject.tag == "Wall")
-            {
-                PeS.RWall = collision.gameObject;
-            }
-        }
-        if (gameObject.name == "Left")
-        {
-            if (collision.gameObject.tag == "pol")
-            {
-                PeS.LPol = collision.gameObject;
-            }
-            if (collision.gameObject.tag == "Wall")
-            {
-                PeS.LWall = collision.gameObject;
-            }
-        }
-    }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (gameObject.name == "Niz")
-        {
-            if (collision.gameObject.tag == "pol")
-            {
-                PeS.NPol2 = null;
-            }
-            if (collision.gameObject.tag == "PolP")
-            {
-                PeS.NBox = null;
-            }
-        }
-        if (gameObject.name == "Verh")
-        {
-            if (collision.gameObject.tag == "pol")
-            {
-                PeS.VPol = null;
-            }
-        }
-        if (gameObject.name == "Right")
-        {
-            if (collision.gameObject.tag == "pol")
-            {
-                PeS.RPol = null;
-            }
-            if (collision.gameObject.tag == "Wall")
-            {
-                PeS.RWall = null;
-            }
-        }
-        if (gameObject.name == "Left")
-        {
-            if (collision.gameObject.tag == "pol")
-            {
-                PeS.LPol = null;
-            }
-            if (collision.gameObject.tag == "Wall")
-            {
-                PeS.LWall = null;
+                PeS.Kray1 = collision.gameObject;
             }
         }
     }
