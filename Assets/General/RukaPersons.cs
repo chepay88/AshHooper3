@@ -64,11 +64,14 @@ public class RukaPersons : MonoBehaviour
     }
     public void WaipoinsUIOtobr(GameObject Gun, int WaipoinDelta)//Отображаем количество патронов
     {
-        GunAll GA = Gun.GetComponent<GunAll>();
-        if (GA.Magazin.x - WaipoinDelta > -1)
+        if (transform.parent.parent.tag == "Hero")
         {
-            GA.Magazin.x = GA.Magazin.x - WaipoinDelta;
-            ZapisUIText(RukaUIInfo.transform.GetChild(0).gameObject, GA.Magazin.x + "/" + GA.Magazin.y, Color.blue);
+            GunAll GA = Gun.GetComponent<GunAll>();
+            if (GA.Magazin.x - WaipoinDelta > -1)
+            {
+                GA.Magazin.x = GA.Magazin.x - WaipoinDelta;
+                ZapisUIText(RukaUIInfo.transform.GetChild(0).gameObject, GA.Magazin.x + "/" + GA.Magazin.y, Color.blue);
+            }
         }
     }
     GameObject WaipoinsOpr(GameObject Pull)//Определяем патрон которым будем стрелять в пуле
