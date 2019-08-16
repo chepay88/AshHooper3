@@ -38,15 +38,19 @@ public class WaiponsAll : MonoBehaviour
         }
     }
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        if(Mathf.Sqrt(Mathf.Abs(Nac.x - transform.position.x)+ Mathf.Abs(Nac.x - transform.position.y))<Dalnost)
+        if (Mathf.Sqrt(Mathf.Abs(Nac.x - transform.position.x) + Mathf.Abs(Nac.x - transform.position.y)) < Dalnost)
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(XYZ.normalized.x * speedW*1000*Time.deltaTime, XYZ.normalized.y * speedW * 1000 * Time.deltaTime);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(XYZ.normalized.x * speedW * 1000 * Time.deltaTime, XYZ.normalized.y * speedW * 1000 * Time.deltaTime);
         }
         else
         {
             gameObject.SetActive(false);
         }
+    }
+    void Update()
+    {
+        
     }
 }

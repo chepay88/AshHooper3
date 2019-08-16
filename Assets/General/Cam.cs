@@ -19,7 +19,7 @@ public class Cam : MonoBehaviour
     {
         //  Camera.main.transform.position = Target.transform.position;
 
-        transform.position = new Vector3(Target.transform.position.x, Target.transform.position.y, transform.position.z);
+        transform.position = new Vector3(Target.transform.position.x, Target.transform.position.y+2, transform.position.z);
 
 
     }

@@ -13,9 +13,13 @@ public class LayerDelta : MonoBehaviour {
 		}
 	}
 	void LayerOn(){
-		for (int i1 = transform.childCount - 1; i1 > -1; i1--) {
-			IzmL(transform.GetChild(i1).gameObject.GetComponent<SpriteRenderer>());
-		}
+        for (int i1 = transform.childCount - 1; i1 > -1; i1--)
+        {
+            if (transform.GetChild(i1).gameObject.GetComponent<SpriteRenderer>())
+            {
+                IzmL(transform.GetChild(i1).gameObject.GetComponent<SpriteRenderer>());
+            }
+        }
 	}
 	void IzmL(SpriteRenderer SR){
 		if (LayerIz != 0 && SR.sortingOrder == LayerIz) {

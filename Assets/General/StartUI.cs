@@ -10,8 +10,8 @@ public class StartUI : MonoBehaviour
     {
         //Debug.Log(Screen.width + "ll" + Screen.height);
        // Debug.Log(transform.GetChild(0).gameObject.GetComponent<RectTransform>().sizeDelta);
-       // transform.GetChild(0).position = new Vector2(150,60);
-        //transform.GetChild(0).gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(250, 100);
+        transform.GetChild(0).position = new Vector2(150,60);
+        transform.GetChild(0).gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(250, 100);
     }
 
     // Update is called once per frame

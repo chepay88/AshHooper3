@@ -84,32 +84,35 @@ public class Pricel : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        GameObject FF = AnimPointPrikladChoise();
-        if(FF== null)
+        if (transform.parent.parent.gameObject.tag == "Hero")
         {
-            FF = PointL[1];
+            GameObject FF = AnimPointPrikladChoise();
+            if (FF == null)
+            {
+                FF = PointL[1];
+            }
+            Vector3 ASD = Camera.main.ScreenToWorldPoint(Input.mousePosition);//Положение мыши в мировых координатах
+            var angle = Vector2.Angle(Vector2.right, ASD - transform.position);//угол между вектором от объекта к мыше и осью х
+            if (ASD.y >= transform.position.y)//Если курсор выше серидины героя
+            {
+                a = 1;
+            }
+            else//Если ниже
+            {
+                a = -1;
+            }
+            GunModelText.transform.GetChild(0).eulerAngles = new Vector3(0, 0, angle * a);//Направляем оружие на курсор
+            Vector3 XY = GunModelText.transform.GetChild(0).eulerAngles;
+            if (ASD.x > transform.position.x)
+            {
+                GunModelText.transform.GetChild(0).eulerAngles = new Vector3(0, XY.y, XY.z);
+            }
+            else
+            {
+                GunModelText.transform.GetChild(0).eulerAngles = new Vector3(180, XY.y, XY.z * -1);
+            }
+            GunModelText.transform.GetChild(0).position = FF.transform.position;
         }
-        Vector3 ASD = Camera.main.ScreenToWorldPoint(Input.mousePosition);//Положение мыши в мировых координатах
-        var angle = Vector2.Angle(Vector2.right, ASD - transform.position);//угол между вектором от объекта к мыше и осью х
-        if (ASD.y >= transform.position.y)//Если курсор выше серидины героя
-        {
-            a = 1;
-        }
-        else//Если ниже
-        {
-            a = -1;
-        }
-        GunModelText.transform.GetChild(0).eulerAngles = new Vector3(0, 0, angle * a);//Направляем оружие на курсор
-        Vector3 XY = GunModelText.transform.GetChild(0).eulerAngles;
-        if (ASD.x > transform.position.x)
-        {
-            GunModelText.transform.GetChild(0).eulerAngles = new Vector3(0, XY.y, XY.z);
-        }
-        else
-        {
-            GunModelText.transform.GetChild(0).eulerAngles = new Vector3(180, XY.y, XY.z * -1);
-        }
-        GunModelText.transform.GetChild(0).position = FF.transform.position;
     }
     void Update()
     {
