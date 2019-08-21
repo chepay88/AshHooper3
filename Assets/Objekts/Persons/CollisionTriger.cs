@@ -11,8 +11,39 @@ public class CollisionTriger : MonoBehaviour
     {
         PeS = transform.parent.parent.gameObject.GetComponent<PersonsS>();
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (gameObject.name == "Niz")
+        {
+            if (collision.gameObject.tag == "pol" && PeS.NPol2 == collision.gameObject)
+            {
+                PeS.NPol2 = null;
+            }
+            if (collision.gameObject.tag == "PolP")
+            {
+                PeS.NBox = null;
+            }
+            if (collision.gameObject.tag == "Perehod")
+            {
+                PeS.NPereh = null;
+            }
+            if (collision.gameObject.tag == "Pol1" && PeS.NPol1 == collision.gameObject)
+            {
+                PeS.NPol1 = null;
+            }
+            if (collision.gameObject.tag == "Kray")
+            {
+                PeS.Kray = null;
+            }
+            if (collision.gameObject.tag == "Kray1")
+            {
+                PeS.Kray1 = null;
+            }
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         if (gameObject.name == "Niz")
         {
             if (collision.gameObject.tag == "pol")
@@ -44,36 +75,7 @@ public class CollisionTriger : MonoBehaviour
         }
         }
         
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (gameObject.name == "Niz")
-        {
-            if (collision.gameObject.tag == "pol")
-            {
-                PeS.NPol2 = null;
-            }
-            if (collision.gameObject.tag == "PolP")
-            {
-                PeS.NBox = null;
-            }
-            if (collision.gameObject.tag == "Perehod")
-            {
-                PeS.NPereh = null;
-            }
-            if (collision.gameObject.tag == "Pol1")
-            {
-                PeS.NPol1 = null;
-            }
-            if (collision.gameObject.tag == "Kray")
-            {
-                PeS.Kray = null;
-            }
-            if (collision.gameObject.tag == "Kray1")
-            {
-                PeS.Kray1 = null;
-            }
-        }
-    }
+    
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (gameObject.name == "Niz")

@@ -8,6 +8,8 @@ public class LayerPolPhis : MonoBehaviour
     public int LayerMin;
     [Header("Максимум слой")]
     public int LayerMax;
+    [Header("Наклон поверхности")]
+    public Vector2 _incline;
     // Start is called before the first frame update
     void Start()
     {

@@ -24,11 +24,13 @@ public class AIEnemy : MonoBehaviour
             if (b > a + 0.05f || b < a - 0.05f)
             {
                 float EZ = a - b;
-                GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, (EZ / Mathf.Abs(EZ)) * -1 * Perss.SpeedZ * Time.deltaTime * Perss.Ruzgon.x);
+                Perss.StepPersZ(EZ / Mathf.Abs(EZ)*-1);
+               // GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, (EZ / Mathf.Abs(EZ)) * -1 * Perss.SpeedZ * Time.deltaTime * Perss.Ruzgon.x);
             }
             else
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0);
+                Perss.StepZStop();
+              //  GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0);
             }
         }
     }

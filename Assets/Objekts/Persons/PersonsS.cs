@@ -207,6 +207,7 @@ public class PersonsS : MonoBehaviour
     {
         if (NPol != null || NBox != null || NLestnica != null)
         {
+            Vector2 _incline = new Vector2(0, 0);
             if (Mathf.Abs(Ruzgon.y) + Ruzgon.z * Time.deltaTime < Ruzgon.x)
             {
                 Ruzgon.y = Mathf.Abs(Ruzgon.y) + Ruzgon.z * Time.deltaTime;
@@ -219,11 +220,33 @@ public class PersonsS : MonoBehaviour
             {
                 Ruzgon.y = speedShag;
             }
-            RG2.velocity = new Vector2(Ruzgon.y * Napr, RG2.velocity.y);//Задаем скорость
+            if (NPol != null)
+            {
+                if (NPol.GetComponent<LayerPolPhis>())
+                {
+                    Ruzgon.y = speedShag;
+                    if (RG2.velocity.y == 0)
+                        {
+                            _incline.y = NPol.GetComponent<LayerPolPhis>()._incline.y;
+                            _incline.x =  _incline.y;
+                            
+                        }
+                        else
+                        {
+                            _incline.x = RG2.velocity.y;
+                        }
+                    
+                }
+            }
+            else
+            {
+
+            }
+            RG2.velocity = new Vector2(Ruzgon.y * Napr , _incline.x);//Задаем скорость
             LostPos = transform.position;
         }
     }
-    public void StepPersZ(int Napr)//Движение персонажа вдоль Z
+    public void StepPersZ(float Napr)//Движение персонажа вдоль Z
     {
         if (Kray == null && PerehodN == false)
         {
@@ -241,7 +264,7 @@ public class PersonsS : MonoBehaviour
             }
         }
     }
-    void StepPersZL(int Napr)
+    void StepPersZL(float Napr)
     {
         if (NPol != null && NLestnica == null)
         {
@@ -254,7 +277,14 @@ public class PersonsS : MonoBehaviour
         Ruzgon.y = 0;
         if (NPol != null || NBox != null || NLestnica != null)
         {
-            RG2.velocity = new Vector2(Ruzgon.y, RG2.velocity.y);//Задаем скорость
+            if (NPol1 != null)
+            {
+                RG2.velocity = new Vector2(Ruzgon.y, 0);//Задаем скорость
+            }
+            else
+            {
+                RG2.velocity = new Vector2(Ruzgon.y, RG2.velocity.y);//Задаем скорость
+            }
         }
     }
     public void StepZStop()//Остановка персонажа по оси z
