@@ -203,12 +203,12 @@ public class PersonsS : MonoBehaviour
             }
         }
     }
-    void RunPersonL(int Napr)
+    void RunPersonL(int Napr)//Непосредственый бег
     {
-        if (NPol != null || NBox != null || NLestnica != null)
+        if (NPol != null || NBox != null || NLestnica != null)//Станедартная проверка на то, стоим ли на поверхности
         {
-            Vector2 _incline = new Vector2(0, 0);
-            if (Mathf.Abs(Ruzgon.y) + Ruzgon.z * Time.deltaTime < Ruzgon.x)
+            Vector2 _incline = new Vector2(0, 0);//Переменная для определения скорости по Y 
+            if (Mathf.Abs(Ruzgon.y) + Ruzgon.z * Time.deltaTime < Ruzgon.x)//Скорость по x
             {
                 Ruzgon.y = Mathf.Abs(Ruzgon.y) + Ruzgon.z * Time.deltaTime;
             }
@@ -216,11 +216,11 @@ public class PersonsS : MonoBehaviour
             {
                 Ruzgon.y = Ruzgon.x;
             }
-            if (LeftRight == true && Napr < 0 || LeftRight == false && Napr > 0)
+            if (LeftRight == true && Napr < 0 || LeftRight == false && Napr > 0)//Если спиной вперед
             {
                 Ruzgon.y = speedShag;
             }
-            if (NPol != null)
+            if (NPol != null)//Блок для корекктировки смещения при подъеме на наклонной(Лестница)
             {
                 if (NPol.GetComponent<LayerPolPhis>())
                 {
@@ -228,21 +228,15 @@ public class PersonsS : MonoBehaviour
                     if (RG2.velocity.y == 0)
                         {
                             _incline.y = NPol.GetComponent<LayerPolPhis>()._incline.y;
-                            _incline.x =  _incline.y;
-                            
+                            _incline.x =  _incline.y;   
                         }
                         else
                         {
                             _incline.x = RG2.velocity.y;
                         }
-                    
                 }
             }
-            else
-            {
-
-            }
-            RG2.velocity = new Vector2(Ruzgon.y * Napr , _incline.x);//Задаем скорость
+            RG2.velocity = new Vector2(Ruzgon.y * Napr , Mathf.Abs(_incline.x) * Napr);//Задаем скорость
             LostPos = transform.position;
         }
     }
