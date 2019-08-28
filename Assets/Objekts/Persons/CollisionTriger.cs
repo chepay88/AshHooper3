@@ -5,11 +5,14 @@ using UnityEngine;
 public class CollisionTriger : MonoBehaviour
 {
     //Скрипт для определения чего мы коснулись. Всю информацию о касании передаем в 
-    PersonsS PeS;
+    PhisicsAll PeS;//Ссылка на физическую составляющею
+        //PersonsS PeS;
     // Start is called before the first frame update
     void Start()
     {
-        PeS = transform.parent.parent.gameObject.GetComponent<PersonsS>();
+        PeS = transform.parent.parent.parent.gameObject.GetComponent<PhisicsAll>();
+      //  PeS = transform.parent.parent.gameObject.GetComponent<PersonsS>();
+
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -49,13 +52,13 @@ public class CollisionTriger : MonoBehaviour
             if (collision.gameObject.tag == "pol")
             {
                 PeS.NPol2 = collision.gameObject;
-                PeS.PadenieSv.y = 0;
+               // PeS.PadenieSv.y = 0;
             }
-            if (collision.gameObject.tag == "PolP")
-            {
-                PeS.NBox = collision.gameObject;
-                PeS.PadenieSv.y = 0;
-            }
+            //if (collision.gameObject.tag == "PolP")
+           // {
+           //    PeS.NBox = collision.gameObject;
+               // PeS.PadenieSv.y = 0;
+           // }
             if(collision.gameObject.tag == "Perehod")
             {
                 PeS.NPereh = collision.gameObject;
@@ -84,9 +87,14 @@ public class CollisionTriger : MonoBehaviour
             {
                 PeS.Kray = collision.gameObject;
             }
-            if (collision.gameObject.tag == "Kray1" && PeS.PerehodN == true)
+            //if (collision.gameObject.tag == "Kray1" && PeS.PerehodN == true)
+            // {
+            //    PeS.Kray1 = collision.gameObject;
+            //  }
+            if (collision.gameObject.tag == "pol")
             {
-                PeS.Kray1 = collision.gameObject;
+                PeS.NPol2 = collision.gameObject;
+                // PeS.PadenieSv.y = 0;
             }
         }
     }

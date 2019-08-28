@@ -11,12 +11,13 @@ public class LayerPersControl : MonoBehaviour
     public GameObject _rLeg;//правая нога
     public GameObject _lArmpit;//левая подмышка
     public GameObject _rArmpit;//правая подмышка
-    PersonsS PeS;
+    public GameObject _shadow;//Тень
+    PhisicsAll PeS;
 
     // Start is called before the first frame update
     void Start()
     {
-        PeS = GetComponent<PersonsS>();
+        PeS = GetComponent<PhisicsAll>();//Кеш
     }
     void LayerDefinition()
     {
@@ -36,15 +37,7 @@ public class LayerPersControl : MonoBehaviour
     }
     void SetLayer(float LayerAll)
     {
-        int LeftRite;
-        if(PeS.LeftRight == true)
-        {
-            LeftRite = 1;
-        }
-        else
-        {
-            LeftRite = -1;
-        }
+        int LeftRite = 1;
         SetLayerQ(_torso, LayerAll);
         SetLayerQ(_lArm, LayerAll + 2 * LeftRite);
         SetLayerQ(_rArm, LayerAll - 2 * LeftRite);
@@ -52,6 +45,8 @@ public class LayerPersControl : MonoBehaviour
         SetLayerQ(_rLeg, LayerAll - 1 * LeftRite);
         SetLayerQ(_rArmpit, LayerAll - 1 * LeftRite);
         SetLayerQ(_lArmpit, LayerAll + 1 * LeftRite);
+        SetLayerQ(_shadow, LayerAll);
+        PeS.LayerPers = LayerAll;
     }
     void SetLayerQ(GameObject A, float C)
     {

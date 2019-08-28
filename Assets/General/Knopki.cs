@@ -13,49 +13,59 @@ public class Knopki : MonoBehaviour
 
     GT GTQ;
     PersonsS PeRs;
+    ControlPerson CP;
     // Use this for initialization
     void Start()
     {
         GTQ = GetComponent<GT>();
+        CP = GTQ.Hero1.GetComponent<ControlPerson>();
         PeRs = GTQ.Hero.GetComponent<PersonsS>();
     }
 
     public void KlickArrRiet()//Метод Нажатие клавиши впрао
     {
-        PeRs.RunPerson(1);
+        CP.MovementPersonsX(1);
+        //PeRs.RunPerson(1);
     }
     public void KlickArrLeft()//Метод Нажатие на клавишу вправо
     {
-        PeRs.RunPerson(-1);
+        CP.MovementPersonsX(-1);
+       // PeRs.RunPerson(-1);
     }
     public void UpKeyKlick()//Метод отпускания клавиши влево или вправо
     {
+        CP.StopMovementPersonsX();
         PeRs.RunStop();
     }
     public void DJumpKlicKey()//Метод прыжка
     {
-        PeRs.VklDjump();
+        CP.JumpStart();
+       // PeRs.VklDjump();
     }
     public void KlickArrVverh()//Метод нажатия клавиши вверх
     {
-        PeRs.StepPersZ(1);
-        PeRs.LestnicaUpDown(1);
+        CP.MovementPersonsZ(1);
+       // PeRs.StepPersZ(1);
+        //PeRs.LestnicaUpDown(1);
     }
     public void KlickArrDown()//Метод нажатия клавиши вниз
     {
-        PeRs.StepPersZ(-1);
-        PeRs.SpuskVniz();
-        PeRs.LestnicaUpDown(-1);
+        CP.MovementPersonsZ(-1);
+        // PeRs.StepPersZ(-1);
+        // PeRs.SpuskVniz();
+        // PeRs.LestnicaUpDown(-1);
     }
     public void KlickArrVverhUp()//Метод отпускания клавиши вверх
     {
-        PeRs.StepZStop();
-        PeRs.LestnicaOff();
+        CP.StopMovementPersonsZ();
+       // PeRs.StepZStop();
+        //PeRs.LestnicaOff();
     }
     public void KlickArrDownUP()//Метод отпускания клавиш вниз
     {
-        PeRs.StepZStop();
-        PeRs.LestnicaOff();
+        CP.StopMovementPersonsZ();
+        //PeRs.StepZStop();
+        //PeRs.LestnicaOff();
     }
     public void KlickMouse0()//Метод нажатия левой клавиши мыши
     {
