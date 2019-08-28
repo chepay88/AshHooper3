@@ -5,9 +5,9 @@ using UnityEngine;
 public class PersonsS : MonoBehaviour
 {//Вся информация о персанаже самом. Как редактируемая так и техническая
  //Параметры персонажа
- // [HideInInspector]
+    [HideInInspector]
     public bool LeftRight;//Куда повеернуты, 1 - право, 0 лево
-                          // [HideInInspector]
+    [HideInInspector]
     public bool UpDown;//Положение падаем или прыгаем 0 - падаем, 1 прыгаем
     [HideInInspector]
     public bool LestnicaOn;//Положение на лестнице
@@ -48,10 +48,11 @@ public class PersonsS : MonoBehaviour
     bool SvPad = false;//Переменная свободного падения
     public bool PerehodN = false;//Переход активирован или нет
     GameObject NPolUp;//Поверхность с которой начинается прыжок
+
     //Чего касаемся
-    //[HideInInspector]
+   // [HideInInspector]
     public GameObject NPol = null;//Пол, коснулись ногами
-                                  //  [HideInInspector]
+    [HideInInspector]
     public GameObject NPol1 = null;//Пол, , тип второй(Лестницы и тд)
     public GameObject Kray = null;//Край пола
     public GameObject Kray1 = null;//Край пола1
@@ -59,7 +60,7 @@ public class PersonsS : MonoBehaviour
     public GameObject NPol2 = null;//Пол, тип первый, просто пол
     [HideInInspector]
     public GameObject VPol = null;//Пол, коснулись головой
-                                  // [HideInInspector]
+    [HideInInspector]
     public GameObject NPereh = null;//Встали на переход
     [HideInInspector]
     public GameObject RPol = null;
@@ -69,9 +70,9 @@ public class PersonsS : MonoBehaviour
     public GameObject RWall = null;//Правым боком каснулись стены
     [HideInInspector]
     public GameObject LWall = null;//Левым боком каснулись стены
-    //[HideInInspector]
+    [HideInInspector]
     public GameObject NLestnica = null;//Стоим на лестнице
-    //[HideInInspector]
+    [HideInInspector]
     public GameObject NBox = null;//Стоим на ящике
     public Vector3 LostPos;
     // Start is called before the first frame update
@@ -142,7 +143,7 @@ public class PersonsS : MonoBehaviour
                 else
                 {
                     PadenieSv.y = PadenieSv.z;
-                }
+            }
                 Ruzgon.y = RG2.velocity.x;
                 RG2.velocity = new Vector2(Ruzgon.y, PadenieSv.y);
         }
@@ -202,11 +203,12 @@ public class PersonsS : MonoBehaviour
             }
         }
     }
-    void RunPersonL(int Napr)
+    void RunPersonL(int Napr)//Непосредственый бег
     {
-        if (NPol != null || NBox != null || NLestnica != null)
+        if (NPol != null || NBox != null || NLestnica != null)//Станедартная проверка на то, стоим ли на поверхности
         {
-            if (Mathf.Abs(Ruzgon.y) + Ruzgon.z * Time.deltaTime < Ruzgon.x)
+            Vector2 _incline = new Vector2(0, 0);//Переменная для определения скорости по Y 
+            if (Mathf.Abs(Ruzgon.y) + Ruzgon.z * Time.deltaTime < Ruzgon.x)//Скорость по x
             {
                 Ruzgon.y = Mathf.Abs(Ruzgon.y) + Ruzgon.z * Time.deltaTime;
             }
@@ -214,15 +216,31 @@ public class PersonsS : MonoBehaviour
             {
                 Ruzgon.y = Ruzgon.x;
             }
-            if (LeftRight == true && Napr < 0 || LeftRight == false && Napr > 0)
+            if (LeftRight == true && Napr < 0 || LeftRight == false && Napr > 0)//Если спиной вперед
             {
                 Ruzgon.y = speedShag;
             }
-            RG2.velocity = new Vector2(Ruzgon.y * Napr, RG2.velocity.y);//Задаем скорость
+            if (NPol != null)//Блок для корекктировки смещения при подъеме на наклонной(Лестница)
+            {
+                if (NPol.GetComponent<LayerPolPhis>())
+                {
+                    Ruzgon.y = speedShag;
+                    if (RG2.velocity.y == 0)
+                        {
+                            _incline.y = NPol.GetComponent<LayerPolPhis>()._incline.y;
+                            _incline.x =  _incline.y;   
+                        }
+                        else
+                        {
+                            _incline.x = RG2.velocity.y;
+                        }
+                }
+            }
+            RG2.velocity = new Vector2(Ruzgon.y * Napr , Mathf.Abs(_incline.x) * Napr);//Задаем скорость
             LostPos = transform.position;
         }
     }
-    public void StepPersZ(int Napr)//Движение персонажа вдоль Z
+    public void StepPersZ(float Napr)//Движение персонажа вдоль Z
     {
         if (Kray == null && PerehodN == false)
         {
@@ -240,7 +258,7 @@ public class PersonsS : MonoBehaviour
             }
         }
     }
-    void StepPersZL(int Napr)
+    void StepPersZL(float Napr)
     {
         if (NPol != null && NLestnica == null)
         {
@@ -253,7 +271,14 @@ public class PersonsS : MonoBehaviour
         Ruzgon.y = 0;
         if (NPol != null || NBox != null || NLestnica != null)
         {
-            RG2.velocity = new Vector2(Ruzgon.y, RG2.velocity.y);//Задаем скорость
+            if (NPol1 != null)
+            {
+                RG2.velocity = new Vector2(Ruzgon.y, 0);//Задаем скорость
+            }
+            else
+            {
+                RG2.velocity = new Vector2(Ruzgon.y, RG2.velocity.y);//Задаем скорость
+            }
         }
     }
     public void StepZStop()//Остановка персонажа по оси z
@@ -285,15 +310,15 @@ public class PersonsS : MonoBehaviour
     {
         if (UpDown == true)//Прыжок
         {
-            JumpIk.y = JumpIk.y + JumpIk.z * Time.deltaTime;
-            if (RWall == null && LWall == null && (transform.position.y + JumpIk.y) - XYUP.y < JumpIk.w && VPol == null)
+            JumpIk.y = JumpIk.y + JumpIk.z * Time.deltaTime;//ускорение по оси y
+            if (RWall == null && LWall == null && (transform.position.y + JumpIk.y) - XYUP.y < JumpIk.w && VPol == null)//проверяем ни касаемся ли случаем чего, и не достигли максимальной высоты
             {
-                RG2.velocity = new Vector2(RG2.velocity.x, JumpIk.y);
+                RG2.velocity = new Vector2(RG2.velocity.x, JumpIk.y);//Если все ок, то движемся(скорость текущая по x, и новая по y
             }
-            else
+            else//иначе
             {
-                UpDown = false;
-                transform.GetChild(1).GetChild(0).gameObject.layer = 9;
+                UpDown = false;//Выключаем индикацию прыжка
+                transform.GetChild(1).GetChild(0).gameObject.layer = 9;//Возвращаем, начальный слой(вроде уже не используется, но влом искать)
             }
         }
     }

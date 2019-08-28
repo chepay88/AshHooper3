@@ -57,9 +57,19 @@ public class Knopki : MonoBehaviour
         PeRs.StepZStop();
         PeRs.LestnicaOff();
     }
-    // Update is called once per frame
-    void Update()
+    public void KlickMouse0()//Метод нажатия левой клавиши мыши
     {
+        GTQ.Hero.transform.GetChild(0).GetChild(0).gameObject.GetComponent<RukaPersons>().StrikeGuns();
+    }
+    // Update is called once per frame
+
+    void Update()
+   
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            KlickMouse0();
+        }
         if (Input.GetKey(LeftK))//Непосредственное нажатие на клавишу влево
         {
             KlickArrLeft();
@@ -102,7 +112,7 @@ public class Knopki : MonoBehaviour
         }
         if (Input.GetKeyDown(Perezaryd))
         {
-            GTQ.Hero.transform.GetChild(0).GetChild(4).gameObject.GetComponent<RukaPersons>().PerezarydMagaz();
+            GTQ.Hero.transform.GetChild(0).GetChild(0).gameObject.GetComponent<RukaPersons>().PerezarydMagaz();
         }
     }
 }
