@@ -19,7 +19,10 @@ public class ControlPerson : MonoBehaviour
         PA = GetComponent<PhisicsAll>();
         PP = GetComponent<ParametrPersons>();
     }
-   
+   public void PersonsToStart()//Возвращаем персонажа, если он откуда-нибудь упал
+    {
+        PersonS.transform.position = PA.LostPos;
+    }
     public void MovementPersonsZ(float Napr)//Передвижение персонажа оси Z
     {
         if(PA.NPol != null && PA._freeFall == false)

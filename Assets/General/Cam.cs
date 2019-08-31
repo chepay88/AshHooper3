@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Cam : MonoBehaviour
 {
+    [Header("Смещение по оси X")]
+    public float X;
+    [Header("Смещение по оси Y")]
+    public float Y;
     public GameObject Target;//ГОна который указывает камера
     // Start is called before the first frame update
     void Start()
@@ -19,7 +23,7 @@ public class Cam : MonoBehaviour
     {
         //  Camera.main.transform.position = Target.transform.position;
 
-        transform.position = new Vector3(Target.transform.position.x, Target.transform.position.y+2, transform.position.z);
+        transform.position = new Vector3(Target.transform.position.x + X, Target.transform.position.y + Y, transform.position.z);
 
 
     }

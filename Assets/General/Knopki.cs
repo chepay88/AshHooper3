@@ -10,6 +10,7 @@ public class Knopki : MonoBehaviour
     public KeyCode Niz;//Движение в низ
     public KeyCode Fire;//Стрельба, удар
     public KeyCode Perezaryd;//Клавиша перезарядки патронов
+    public KeyCode Program1;//Вспомогательная кнопка.
 
     GT GTQ;
     PersonsS PeRs;
@@ -20,6 +21,10 @@ public class Knopki : MonoBehaviour
         GTQ = GetComponent<GT>();
         CP = GTQ.Hero1.GetComponent<ControlPerson>();
         PeRs = GTQ.Hero.GetComponent<PersonsS>();
+    }
+    public void KlickProgram1()//Метод нажатия на клавишу программ
+    {
+        CP.PersonsToStart();
     }
 
     public void KlickArrRiet()//Метод Нажатие клавиши впрао
@@ -76,6 +81,10 @@ public class Knopki : MonoBehaviour
     void Update()
    
     {
+        if (Input.GetKeyDown(Program1))
+        {
+            KlickProgram1();
+        }
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             KlickMouse0();
