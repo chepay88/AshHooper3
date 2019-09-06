@@ -6,6 +6,7 @@ public class ControlPerson : MonoBehaviour
 {
 
     //Управление персонажем
+    public GameObject GT;//Ссылка на General
     GameObject PersonS;
     Rigidbody2D RG2;
     PhisicsAll PA;
@@ -71,6 +72,10 @@ public class ControlPerson : MonoBehaviour
         if (PA.NPol != null && PA.NPol == PA.NPol2)
         {
             PA.TakeOfftheGround();
+        }
+        if(PA.NPol == PA.NPol1)
+        {
+            GT.GetComponent<GT>().DialogPole.GetComponent<UIDialogPersonsPolo>().TextDialog("Тебе мама не говорила, что не стоит беситься на лестнице?");
         }
     }
     public void JumpBegin()//Сам прыжок

@@ -8,12 +8,15 @@ public class StartUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Debug.Log(Screen.width + "ll" + Screen.height);
-       // Debug.Log(transform.GetChild(0).gameObject.GetComponent<RectTransform>().sizeDelta);
-        transform.GetChild(0).position = new Vector2(150,60);
-        transform.GetChild(0).gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(250, 100);
+        StartUIA();
     }
-
+    void StartUIA()
+    {
+        float a = Screen.width / 6;
+        transform.GetChild(0).gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(a, a/3);
+        transform.GetChild(0).position = new Vector2(a - a/4, a/6 + a/12);
+        
+    }
     // Update is called once per frame
     void Update()
     {
