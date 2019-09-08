@@ -42,6 +42,10 @@ public class CollisionTriger : MonoBehaviour
             {
                 PeS.Kray1 = null;
             }
+            if(collision.gameObject.tag == "Dialog")
+            {
+                PeS.Dialog = null;
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -75,6 +79,10 @@ public class CollisionTriger : MonoBehaviour
             {
                 PeS.Kray1 = collision.gameObject;
             }
+            if (collision.gameObject.tag == "Dialog")
+            {
+                PeS.Dialog = collision.gameObject;
+            }
         }
         }
         
@@ -95,6 +103,10 @@ public class CollisionTriger : MonoBehaviour
             {
                 PeS.NPol2 = collision.gameObject;
                 // PeS.PadenieSv.y = 0;
+            }
+            if (collision.gameObject.tag == "Dialog")
+            {
+                PeS.Dialog = collision.gameObject;
             }
         }
     }

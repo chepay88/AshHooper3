@@ -31,6 +31,7 @@ public class PhisicsAll : MonoBehaviour
     public GameObject NLestnica = null;//Стоим на лестнице
    // [HideInInspector]
     public GameObject NBox = null;//Стоим на ящике
+    public GameObject Dialog = null;//Объект с диалогом 
     public Vector3 LostPos;
     public Vector2 _velocity;//Скорость на сохранение
     public float LayerPers;//Слой на котором вообщем стоит персонаж

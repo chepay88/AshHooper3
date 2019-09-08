@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ControlPerson : MonoBehaviour
 {
-
+    public Texture BJ;
     //Управление персонажем
     public GameObject GT;//Ссылка на General
     GameObject PersonS;
@@ -20,7 +20,14 @@ public class ControlPerson : MonoBehaviour
         PA = GetComponent<PhisicsAll>();
         PP = GetComponent<ParametrPersons>();
     }
-   public void PersonsToStart()//Возвращаем персонажа, если он откуда-нибудь упал
+    void DialogDefinition()
+    {
+        if(PA.Dialog != null && PA.Dialog.GetComponent<ScenarioObjScript>()._vklSkript == true)
+        {
+    
+        }
+    }
+    public void PersonsToStart()//Возвращаем персонажа, если он откуда-нибудь упал
     {
         PersonS.transform.position = PA.LostPos;
     }
@@ -75,7 +82,7 @@ public class ControlPerson : MonoBehaviour
         }
         if(PA.NPol == PA.NPol1)
         {
-            GT.GetComponent<GT>().DialogPole.GetComponent<UIDialogPersonsPolo>().TextDialog("Тебе мама не говорила, что не стоит беситься на лестнице?");
+            GT.GetComponent<GT>().DialogPole.GetComponent<UIDialogPersonsPolo>().TextDialog("BJ","Тебе мама не говорила, что не стоит беситься на лестнице?", BJ);
         }
     }
     public void JumpBegin()//Сам прыжок
@@ -92,6 +99,7 @@ public class ControlPerson : MonoBehaviour
     void Update()
     {
         JumpBegin();
+        DialogDefinition();
     }
     //Вспомогательные функции и методы
     float DirectionPersons(float Napr, bool _directionP)//определяем множитель для направления шага
