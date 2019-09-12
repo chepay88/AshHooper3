@@ -13,10 +13,16 @@ public class UIDialogPersonsPolo : MonoBehaviour
     string _personNameD;//Имя персонажа
     string _textDD;//Сам текст
     Texture _texturePersonD;//Текстура персонажа
+    public GameObject DialogScenario;//Объект, который тресем диалог
+    public GameObject GT;
+    public GT GTH;
+    bool _vklo;//Включение массива
+    List<DialogJ> JH = new List<DialogJ>();
     // Start is called before the first frame update
     void Start()
     {
         StartUIA();
+        GTH = GT.GetComponent<GT>();
     }
     void StartUIA()
     {
@@ -44,7 +50,20 @@ public class UIDialogPersonsPolo : MonoBehaviour
     }//Установка размеров окна при старте
     public void TextDialogMass()
     {
-
+        if(DialogScenario != null)
+        {
+            JH = DialogScenario.GetComponent<ScenarioObjScript>().DialogR;
+            GTH.Hero1.GetComponent<PhisicsAll>().Dialog = null;
+            DialogScenario.GetComponent<ScenarioObjScript>()._vklSkript = false;
+            DialogScenario = null;
+            _vklo = true;
+        }
+        if(JH.Count > 0 && _vklo == true)
+        {
+            TextDialog(JH[0]._personName, JH[0]._personDialog, JH[0]._textureDialog);
+            JH.RemoveAt(0);
+            _vklo = false;
+        }
     }
     public void TextDialog(string _personName, string _textD, Texture _texturePerson)//имя персонажа, текст диалога, текстура персонажа
     {
@@ -58,7 +77,7 @@ public class UIDialogPersonsPolo : MonoBehaviour
     {
         if (_timerStart == true)
         {
-            if (_timer > 0.1f)
+            if (_timer > 0.05f)
             {
                 transform.GetChild(0).gameObject.SetActive(true);
                 GameObject UIY = transform.GetChild(1).gameObject;
@@ -88,7 +107,14 @@ public class UIDialogPersonsPolo : MonoBehaviour
         }
         if (_timer1 > 1 && transform.GetChild(2).gameObject.activeSelf == true)
         {
-            StartCoroutine("CloseDialog");
+            if (JH.Count > 0)
+            {
+                _vklo = true;
+            }
+            else
+            {
+                StartCoroutine("CloseDialog");
+            }
         }
     }
     IEnumerator CloseDialog()
@@ -122,7 +148,7 @@ public class UIDialogPersonsPolo : MonoBehaviour
     {    
         while (i1 != _textDD.Length-1)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             if (i1 != transform.GetChild(2).gameObject.GetComponent<Text>().text.Length && i1 < _textDD.Length+1)
             {
                 transform.GetChild(2).gameObject.GetComponent<Text>().text = _textDD.Substring(0, i1);
@@ -162,6 +188,7 @@ public class UIDialogPersonsPolo : MonoBehaviour
         TimerRun();
         TimerRun1();
         DialogRun();
+        TextDialogMass();
        // CloseDialog();
     }
 }

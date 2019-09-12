@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class RukaPersons : MonoBehaviour
 {
     public GameObject RukaUIInfo;// Ссылка на иконку оружия
-    public GameObject GT;
+    GameObject GT;
     GT GTY;
     // Start is called before the first frame update
     void Start()
     {
+        GT = transform.parent.parent.parent.gameObject.GetComponent<ControlPerson>().GT;
         GTY = GT.GetComponent<GT>();
         OtobragIkonGun();
         WaipoinsUIOtobr(transform.GetChild(0).gameObject, 0);
@@ -20,7 +21,6 @@ public class RukaPersons : MonoBehaviour
         GameObject Gun = transform.GetChild(0).gameObject;
         GunAll GAL = Gun.GetComponent<GunAll>();
         GAL.Magazin.x = GAL.Magazin.y;
-        Debug.Log(GAL.Magazin);
         WaipoinsUIOtobr(Gun, 0);
     }
     void ZapisUIText(GameObject UIT, string TextU, Color Colp)//Метод отображения текста в UI

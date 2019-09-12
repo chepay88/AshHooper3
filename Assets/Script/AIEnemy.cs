@@ -11,8 +11,8 @@ public class AIEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GTQ = GetComponent<PersonsS>().Gen.GetComponent<GT>();
-        GG = GTQ.Hero;
+        GTQ = GetComponent<ControlPerson>().GT.GetComponent<GT>();
+        GG = GTQ.Hero1;
         Perss = GetComponent<PersonsS>();
     }
     public void AxisZFind()//Поиск позиции по оси Z

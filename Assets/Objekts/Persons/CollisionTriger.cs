@@ -81,7 +81,10 @@ public class CollisionTriger : MonoBehaviour
             }
             if (collision.gameObject.tag == "Dialog")
             {
-                PeS.Dialog = collision.gameObject;
+                if (collision.GetComponent<ScenarioObjScript>()._vklSkript == true)
+                {
+                    PeS.Dialog = collision.gameObject;
+                }
             }
         }
         }
@@ -106,7 +109,10 @@ public class CollisionTriger : MonoBehaviour
             }
             if (collision.gameObject.tag == "Dialog")
             {
-                PeS.Dialog = collision.gameObject;
+                if (collision.GetComponent<ScenarioObjScript>()._vklSkript == true)
+                {
+                    PeS.Dialog = collision.gameObject;
+                }
             }
         }
     }

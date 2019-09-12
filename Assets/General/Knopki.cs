@@ -13,14 +13,14 @@ public class Knopki : MonoBehaviour
     public KeyCode Program1;//Вспомогательная кнопка.
 
     GT GTQ;
-    PersonsS PeRs;
+   // PersonsS PeRs;
     ControlPerson CP;
     // Use this for initialization
     void Start()
     {
         GTQ = GetComponent<GT>();
         CP = GTQ.Hero1.GetComponent<ControlPerson>();
-        PeRs = GTQ.Hero.GetComponent<PersonsS>();
+        //PeRs = GTQ.Hero.GetComponent<PersonsS>();
     }
     public void KlickProgram1()//Метод нажатия на клавишу программ
     {
@@ -40,7 +40,7 @@ public class Knopki : MonoBehaviour
     public void UpKeyKlick()//Метод отпускания клавиши влево или вправо
     {
         CP.StopMovementPersonsX();
-        PeRs.RunStop();
+        //PeRs.RunStop();
     }
     public void DJumpKlicKey()//Метод прыжка
     {

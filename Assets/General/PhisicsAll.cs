@@ -7,33 +7,39 @@ public class PhisicsAll : MonoBehaviour
     //Основная физика персонажей и предметов
 
     //Чего касаемся
-    // [HideInInspector]
+    [HideInInspector]
     public GameObject NPol = null;// Общая переменная, выводные данные того, на чем стоим
-   // [HideInInspector]
+    [HideInInspector]
     public GameObject NPol1 = null;//Пол, , тип второй(Лестницы и тд)
+    [HideInInspector]
     public GameObject Kray = null;//Край пола
+    [HideInInspector]
     public GameObject Kray1 = null;//Край пола1
-   // [HideInInspector]
+    [HideInInspector]
     public GameObject NPol2 = null;//Пол, тип первый, просто пол
-   // [HideInInspector]
+    [HideInInspector]
     public GameObject VPol = null;//Пол, коснулись головой
-  //  [HideInInspector]
+    [HideInInspector]
     public GameObject NPereh = null;//Встали на переход
-  //  [HideInInspector]
+    [HideInInspector]
     public GameObject RPol = null;
-   // [HideInInspector]
+    [HideInInspector]
     public GameObject LPol = null;
-  //  [HideInInspector]
+    [HideInInspector]
     public GameObject RWall = null;//Правым боком каснулись стены
-   // [HideInInspector]
+    [HideInInspector]
     public GameObject LWall = null;//Левым боком каснулись стены
-   // [HideInInspector]
+    [HideInInspector]
     public GameObject NLestnica = null;//Стоим на лестнице
-   // [HideInInspector]
+    [HideInInspector]
     public GameObject NBox = null;//Стоим на ящике
+    [HideInInspector]
     public GameObject Dialog = null;//Объект с диалогом 
+    [HideInInspector]
     public Vector3 LostPos;
+    [HideInInspector]
     public Vector2 _velocity;//Скорость на сохранение
+    [HideInInspector]
     public float LayerPers;//Слой на котором вообщем стоит персонаж
 
 
@@ -42,7 +48,9 @@ public class PhisicsAll : MonoBehaviour
     public int Perehod = 0;//Переход с одного на другой тип(0- обычный пол, 1 - лестница
     [HideInInspector]
     public bool _direction = false;
+    [HideInInspector]
     public bool _freeFall = false;//Свободный полет включен
+    [HideInInspector]
     public bool _takeOfftheGround;//Показывем, что мы намеренно оторвались от земли
     GameObject PersonS;
     Rigidbody2D RG2;

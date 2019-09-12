@@ -20,11 +20,11 @@ public class ControlPerson : MonoBehaviour
         PA = GetComponent<PhisicsAll>();
         PP = GetComponent<ParametrPersons>();
     }
-    void DialogDefinition()
+    void DialogDefinition()//Определяем что стоим на объеке сценария
     {
         if(PA.Dialog != null && PA.Dialog.GetComponent<ScenarioObjScript>()._vklSkript == true)
         {
-    
+            GT.GetComponent<GT>().DialogPole.GetComponent<UIDialogPersonsPolo>().DialogScenario = PA.Dialog;
         }
     }
     public void PersonsToStart()//Возвращаем персонажа, если он откуда-нибудь упал
@@ -80,7 +80,7 @@ public class ControlPerson : MonoBehaviour
         {
             PA.TakeOfftheGround();
         }
-        if(PA.NPol == PA.NPol1)
+        if(PA.NPol == PA.NPol1 && PA.Perehod == 1)
         {
             GT.GetComponent<GT>().DialogPole.GetComponent<UIDialogPersonsPolo>().TextDialog("BJ","Тебе мама не говорила, что не стоит беситься на лестнице?", BJ);
         }
