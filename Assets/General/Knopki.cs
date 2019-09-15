@@ -74,7 +74,7 @@ public class Knopki : MonoBehaviour
     }
     public void KlickMouse0()//Метод нажатия левой клавиши мыши
     {
-        GTQ.Hero.transform.GetChild(0).GetChild(0).gameObject.GetComponent<RukaPersons>().StrikeGuns();
+        GTQ.Hero.transform.GetChild(0).GetChild(0).gameObject.GetComponent<RukaPersons>().StrikeGuns(Camera.main.ScreenToWorldPoint(Input.mousePosition));
     }
     // Update is called once per frame
 

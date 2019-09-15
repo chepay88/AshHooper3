@@ -10,7 +10,8 @@ public class ParametrPersons : MonoBehaviour
     public Vector2 _freeFallSpeed;// x - ускорение, y - максимальная скорость
     [Header("Скорость прыжка и его высота")]
     public Vector2 JumpSpeed;
-
+    [Header("Здоровье персонажа")]
+    public float _helfPers;//Здоровье персонажа
     // Start is called before the first frame update
     void Start()
     {

@@ -103,8 +103,7 @@ public class PhisicsAll : MonoBehaviour
              StopFreeFall();//Остановка свободного падения
         }
     }
-
-   private void PerehodDetermine()//Включаем переход
+    private void PerehodDetermine()//Включаем переход
     {
         if(NPereh != null)//Если стоим на переходе
         {
@@ -135,16 +134,19 @@ public class PhisicsAll : MonoBehaviour
     }
     void NapravPers()//Напрвление героя
     {
-        Vector3 XY = transform.eulerAngles;
-        if (transform.position.x < Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
+        if (tag == "Hero")
         {
-            _direction = true;
-            transform.eulerAngles = new Vector3(XY.x, 0, XY.z);
-        }
-        else
-        {
-            _direction = false;
-            transform.eulerAngles = new Vector3(XY.x, 180, XY.z);
+            Vector3 XY = transform.eulerAngles;
+            if (transform.position.x < Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
+            {
+                _direction = true;
+                transform.eulerAngles = new Vector3(XY.x, 0, XY.z);
+            }
+            else
+            {
+                _direction = false;
+                transform.eulerAngles = new Vector3(XY.x, 180, XY.z);
+            }
         }
     }
     // Update is called once per frame

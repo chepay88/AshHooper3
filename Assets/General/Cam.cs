@@ -23,7 +23,7 @@ public class Cam : MonoBehaviour
     {
         //  Camera.main.transform.position = Target.transform.position;
 
-        transform.position = new Vector3(Target.transform.position.x + X, Target.transform.position.y + Y, transform.position.z);
+        transform.position = new Vector3(Target.transform.position.x + X, 0 /*Target.transform.position.y + Y*/, transform.position.z);
 
 
     }

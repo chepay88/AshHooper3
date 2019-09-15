@@ -7,6 +7,7 @@ public class GT : MonoBehaviour {
     public GameObject WaipoinsPull;// Ссылка на пул патронов и снарядов
     public int WaipoinsPullKol;//Количество снарядов в пулле
     public GameObject DialogPole;//Диалоговое поле
+    public GameObject HelfBarUI;//ССылка на хелфбар героя
 	// Use this for initialization
 	void Start () {
 	

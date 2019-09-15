@@ -35,19 +35,22 @@ public class PersonsControl : MonoBehaviour
     }//Останавливаем разгон
     public bool NapravPers(GameObject Pers)
     {
-        Vector3 XY = Pers.transform.eulerAngles;
         bool LefPrav = false;
-        if (Pers.transform.position.x < Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
+        if (tag == "Hero")
         {
-            LefPrav = true;
-            Pers.transform.eulerAngles = new Vector3(XY.x, 0, XY.z);
+            Vector3 XY = Pers.transform.eulerAngles;
+            if (Pers.transform.position.x < Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
+            {
+                LefPrav = true;
+                Pers.transform.eulerAngles = new Vector3(XY.x, 0, XY.z);
+            }
+            else
+            {
+                LefPrav = false;
+                Pers.transform.eulerAngles = new Vector3(XY.x, 180, XY.z);
+            }
         }
-        else
-        {
-            LefPrav = false;
-            Pers.transform.eulerAngles = new Vector3(XY.x, 180, XY.z);
-        }
-        return LefPrav;
+            return LefPrav;
     }//Напрвление героя
     public Vector4 Padenie(GameObject Pers, Vector4 Padenie)
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pricel : MonoBehaviour
 {
     public GameObject GunModelText;//Текстура
-    GameObject[] PointL = new GameObject[3];
+    public GameObject[] PointL = new GameObject[3];
     int a;//Переменная для нахождения направления курсора
     // Start is called before the first frame update
     void Start()
@@ -55,7 +55,7 @@ public class Pricel : MonoBehaviour
             }
         }
     }
-    GameObject AnimPointPrikladChoise()//Точки анимации, движение анимации
+   public GameObject AnimPointPrikladChoise()//Точки анимации, движение анимации
     {
         GameObject FF = null;
         if(GunModelText.transform.GetChild(0).eulerAngles.z < 360)
@@ -111,7 +111,7 @@ public class Pricel : MonoBehaviour
             {
                 GunModelText.transform.GetChild(0).eulerAngles = new Vector3(180, XY.y, XY.z * -1);
             }
-            GunModelText.transform.GetChild(0).position = FF.transform.position;
+           // GunModelText.transform.GetChild(0).position = FF.transform.position;
         }
     }
     void Update()

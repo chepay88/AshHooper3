@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControlPerson : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class ControlPerson : MonoBehaviour
         RG2 = PersonS.GetComponent<Rigidbody2D>();
         PA = GetComponent<PhisicsAll>();
         PP = GetComponent<ParametrPersons>();
+        DeltaHalf(0);
     }
     void DialogDefinition()//Определяем что стоим на объеке сценария
     {
@@ -93,6 +95,14 @@ public class ControlPerson : MonoBehaviour
             {
                 RG2.velocity = new Vector2(PA._velocity.x, RG2.velocity.y + PP.JumpSpeed.x);
             }
+        }
+    }
+    public void DeltaHalf(float _deltaHalf)//Изменяем здоровье(если положительное значение - лечит)
+    {
+        PP._helfPers = PP._helfPers + _deltaHalf;
+        if(gameObject.tag == "Hero")
+        {
+            GT.GetComponent<GT>().HelfBarUI.transform.GetChild(0).gameObject.GetComponent<Text>().text = PP._helfPers.ToString();
         }
     }
     // Update is called once per frame

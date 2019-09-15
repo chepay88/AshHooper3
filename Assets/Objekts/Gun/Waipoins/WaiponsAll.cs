@@ -21,6 +21,17 @@ public class WaiponsAll : MonoBehaviour
     {
  
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        GameObject GG = collision.gameObject.transform.parent.parent.parent.gameObject;
+        ControlPerson CP = GG.GetComponent<ControlPerson>();
+        //ParametrPersons PP = GG.GetComponent<ParametrPersons>();
+        //PP._helfPers = PP._helfPers - DamageW.x;
+        //print(PP._helfPers);
+        CP.DeltaHalf(DamageW.x * -1f);
+        gameObject.SetActive(false);
+        //print(collision.gameObject);
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
        // Debug.Log(collision);

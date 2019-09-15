@@ -8,48 +8,64 @@ public class RukaPersons : MonoBehaviour
     public GameObject RukaUIInfo;// Ссылка на иконку оружия
     GameObject GT;
     GT GTY;
+    GameObject Gun;
+    GunAll GAL;
+    GameObject _parentP;//Первый объект в персонаже
     // Start is called before the first frame update
     void Start()
     {
-        GT = transform.parent.parent.parent.gameObject.GetComponent<ControlPerson>().GT;
+        _parentP = transform.parent.parent.parent.gameObject;
+        GT = _parentP.GetComponent<ControlPerson>().GT;
         GTY = GT.GetComponent<GT>();
         OtobragIkonGun();
         WaipoinsUIOtobr(transform.GetChild(0).gameObject, 0);
+        Gun = transform.GetChild(0).gameObject;
+        GAL = Gun.GetComponent<GunAll>();
+        
     }
     public void PerezarydMagaz()
     {
-        GameObject Gun = transform.GetChild(0).gameObject;
-        GunAll GAL = Gun.GetComponent<GunAll>();
         GAL.Magazin.x = GAL.Magazin.y;
         WaipoinsUIOtobr(Gun, 0);
+        GAL._deltaTime = 0;
     }
     void ZapisUIText(GameObject UIT, string TextU, Color Colp)//Метод отображения текста в UI
     {
         UIT.GetComponent<Text>().text = TextU;
         UIT.GetComponent<Text>().color = Colp;
     }
-    public void StrikeGuns()//Выстрел из оружия
+    public void StrikeGuns(Vector2 ASD)//Выстрел из оружия
     {
-        GameObject Gun = transform.GetChild(0).gameObject;
-        GunAll GAL = Gun.GetComponent<GunAll>();
-        if (GAL.Magazin.x - GAL.Ocher > -1)
+        if (GAL._deltaTime == 0 || Time.time - GAL._deltaTime > GAL.TimeZaderj)
         {
-            GameObject WaipoinsFire = WaipoinsOpr(GTY.WaipoinsPull);
-            WaipoinsFire.transform.position = Gun.transform.position;
-            WaipoinsFire.transform.rotation = Gun.transform.rotation;
-            WaipoinsFire.SetActive(true);
-            WaipoinsUIOtobr(Gun, 1);
-            WaiponsAll WA = WaipoinsFire.GetComponent<WaiponsAll>();
-            //Расчеты напраления вектора
-            Vector3 ASD = Camera.main.ScreenToWorldPoint(Input.mousePosition);//Положение мыши в мировых координатах
-            //Передаем информацию в патрон
-            WA.Nac = Gun.transform.position;
-            WaipoinsFire.GetComponent<SpriteRenderer>().sortingOrder = transform.GetChild(0).GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder;
-            WA.XYZ = new Vector2(ASD.x - Gun.transform.position.x, ASD.y - Gun.transform.position.y);
-            WA.NachDlina = Mathf.Abs(WA.XYZ.magnitude - WaipoinsFire.transform.position.magnitude);
-            WA.Dalnost = GAL.DalGun;
-            WA.speedW = GAL.SpeedWaipoins;
-            WaipoinsFire.SetActive(true);
+            if (GAL.Magazin.x - GAL.Ocher > -1)
+            {
+                GameObject WaipoinsFire = WaipoinsOpr(GTY.WaipoinsPull);
+                WaipoinsFire.transform.position = Gun.transform.position;
+                WaipoinsFire.transform.rotation = Gun.transform.rotation;
+                WaipoinsFire.SetActive(true);
+                WaipoinsUIOtobr(Gun, 1);
+                WaiponsAll WA = WaipoinsFire.GetComponent<WaiponsAll>();
+                GAL._deltaTime = Time.time;
+                //Расчеты напраления вектора
+                //Передаем информацию в патрон
+                if (_parentP.tag == "Hero")
+                {
+                    WaipoinsFire.layer = 14;
+                }
+                else
+                {
+                    WaipoinsFire.layer = 15;
+                }
+                WA.Nac = Gun.transform.position;
+                WaipoinsFire.GetComponent<SpriteRenderer>().sortingOrder = transform.GetChild(0).GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder;//Слой 
+                WA.XYZ = new Vector2(ASD.x - Gun.transform.position.x, ASD.y - Gun.transform.position.y);
+                WA.NachDlina = Mathf.Abs(WA.XYZ.magnitude - WaipoinsFire.transform.position.magnitude);
+                WA.Dalnost = GAL.DalGun;//Дальность полета пули
+                WA.speedW = GAL.SpeedWaipoins;//Скорость полета пули
+                WA.DamageW.x = GAL.AttakStiAttak.x;//Урон от пули
+                WaipoinsFire.SetActive(true);//Включение пули
+            }
         }
         //GTY.WaipoinsPull;
     }
@@ -68,17 +84,17 @@ public class RukaPersons : MonoBehaviour
     }
     public void WaipoinsUIOtobr(GameObject Gun, int WaipoinDelta)//Отображаем количество патронов
     {
+        GunAll GA = Gun.GetComponent<GunAll>();
+        GA.Magazin.x = GA.Magazin.x - WaipoinDelta;
         if (transform.parent.parent.tag == "Hero")
         {
-            GunAll GA = Gun.GetComponent<GunAll>();
             if (GA.Magazin.x - WaipoinDelta > -1)
-            {
-                GA.Magazin.x = GA.Magazin.x - WaipoinDelta;
+            {       
                 ZapisUIText(RukaUIInfo.transform.GetChild(0).GetChild(0).gameObject, GA.Magazin.x + "/" + GA.Magazin.y, Color.blue);
             }
         }
     }
-    GameObject WaipoinsOpr(GameObject Pull)//Определяем патрон которым будем стрелять в пуле
+    public  GameObject WaipoinsOpr(GameObject Pull)//Определяем патрон которым будем стрелять в пуле
     {
         GameObject PullPr = null;
         int a = 0;
@@ -92,6 +108,12 @@ public class RukaPersons : MonoBehaviour
             else
             {
                 a = a + 1;
+                if(a == Pull.transform.childCount-1)
+                {
+                    PullPr = Instantiate(Pull.transform.GetChild(0).gameObject, Pull.transform.position, Pull.transform.rotation, Pull.transform) as GameObject;
+                    PullPr.name = "L" + a;
+                    a = Pull.transform.childCount;
+                }
             }
         }
         return PullPr;

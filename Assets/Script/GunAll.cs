@@ -27,6 +27,8 @@ public class GunAll : MonoBehaviour
     public float TimePerezarGun;//Время перезарядки
     [Header("Скорость полета пули")]
     public float SpeedWaipoins;//Скорость полета пули
+   // [HideInInspector]
+    public float _deltaTime;
 
     public GameObject GG;
     public float Priklad;//Думаю хдесь это край приклада

@@ -15,7 +15,14 @@ public class StartUI : MonoBehaviour
         float a = Screen.width / 6;
         transform.GetChild(0).gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(a, a/3);
         transform.GetChild(0).position = new Vector2(a - a/4, a/6 + a/12);
-        
+        TwoUIBar();   
+    }
+    void TwoUIBar()//Ставим бар на место
+    {
+        float a = Screen.width;
+        a = a - a / 6;
+        print(a);
+        transform.parent.GetChild(2).GetChild(0).position = new Vector2(a, 50);
     }
     // Update is called once per frame
     void Update()
