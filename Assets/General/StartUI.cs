@@ -21,7 +21,6 @@ public class StartUI : MonoBehaviour
     {
         float a = Screen.width;
         a = a - a / 6;
-        print(a);
         transform.parent.GetChild(2).GetChild(0).position = new Vector2(a, 50);
     }
     // Update is called once per frame

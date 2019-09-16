@@ -71,7 +71,9 @@ public class PhisicsAll : MonoBehaviour
         transform.GetChild(0).GetChild(2).GetChild(0).gameObject.layer = 12;
         this.gameObject.layer = 12;
         LostPos = PersonS.transform.position;
+       // print(RG2.velocity);
         _velocity = new Vector2(RG2.velocity.x, 0);
+        RG2.velocity = _velocity;
     }
     private void FreeFall()//Свободное падение 
     {
@@ -94,7 +96,7 @@ public class PhisicsAll : MonoBehaviour
         {
             NPol = NPereh;
         }
-        if(NPol == null)
+        if(NPol == null && _takeOfftheGround != true)
         {
             _freeFall = true;
         }

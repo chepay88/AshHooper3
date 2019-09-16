@@ -91,9 +91,16 @@ public class ControlPerson : MonoBehaviour
     {
         if (this.gameObject.layer == 12)
         {
-            if (PersonS.transform.position.y - PA.LostPos.y < PP.JumpSpeed.y)
+            if (Mathf.Abs(PersonS.transform.position.y - PA.LostPos.y) < PP.JumpSpeed.y)
             {
+                //print(PersonS.transform.position.y + " - "  + PA.LostPos.y + " = " + (PersonS.transform.position.y - PA.LostPos.y) +  " < " + PP.JumpSpeed.y);
                 RG2.velocity = new Vector2(PA._velocity.x, RG2.velocity.y + PP.JumpSpeed.x);
+               // print(RG2.velocity);
+            }
+            else
+            {
+                PA._takeOfftheGround = false;
+                RG2.velocity = new Vector2(PA._velocity.x, RG2.velocity.y + PP.JumpSpeed.x*-1);
             }
         }
     }
@@ -106,9 +113,13 @@ public class ControlPerson : MonoBehaviour
         }
     }
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         JumpBegin();
+    }
+    void Update()
+    {
+        //JumpBegin();
         DialogDefinition();
     }
     //Вспомогательные функции и методы

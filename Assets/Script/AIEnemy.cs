@@ -74,7 +74,6 @@ public class AIEnemy : MonoBehaviour
         if (GunModelText.transform.GetChild(0).gameObject.GetComponent<GunAll>().Magazin.x < 1)
         {
             GunModelText.GetComponent<RukaPersons>().PerezarydMagaz();
-            print("L");
         }
     }
     void TrackDown(GameObject _target, float _dist)//Приследование

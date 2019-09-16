@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Anima2D;
 
 public class WaiponsAll : MonoBehaviour
 {
@@ -23,13 +24,14 @@ public class WaiponsAll : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         GameObject GG = collision.gameObject.transform.parent.parent.parent.gameObject;
-        ControlPerson CP = GG.GetComponent<ControlPerson>();
-        //ParametrPersons PP = GG.GetComponent<ParametrPersons>();
-        //PP._helfPers = PP._helfPers - DamageW.x;
-        //print(PP._helfPers);
-        CP.DeltaHalf(DamageW.x * -1f);
-        gameObject.SetActive(false);
+        if (Mathf.Abs(GG.GetComponent<LayerPersControl>()._torso.GetComponent<SpriteMeshInstance>().sortingOrder - GetComponent<SpriteRenderer>().sortingOrder) < 3)
+        {
+            ControlPerson CP = GG.GetComponent<ControlPerson>();
+            CP.DeltaHalf(DamageW.x * -1f);
+            gameObject.SetActive(false);
+        }
         //print(collision.gameObject);
     }
     private void OnCollisionEnter2D(Collision2D collision)

@@ -85,7 +85,7 @@ public class Knopki : MonoBehaviour
         {
             KlickProgram1();
         }
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
             KlickMouse0();
         }
