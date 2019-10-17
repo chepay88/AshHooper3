@@ -12,6 +12,7 @@ public class ControlPerson : MonoBehaviour
     Rigidbody2D RG2;
     PhisicsAll PA;
     ParametrPersons PP;
+    Animator PersonsAnimator;//Аниматор персонажа ссылка
     // Start is called before the first frame update
 
     void Start()
@@ -21,6 +22,7 @@ public class ControlPerson : MonoBehaviour
         PA = GetComponent<PhisicsAll>();
         PP = GetComponent<ParametrPersons>();
         DeltaHalf(0);
+        PersonsAnimator = GetComponent<LayerPersControl>()._torso.transform.parent.gameObject.GetComponent<Animator>();
     }
     void DialogDefinition()//Определяем что стоим на объеке сценария
     {
@@ -57,12 +59,14 @@ public class ControlPerson : MonoBehaviour
             if ((Mathf.Abs(PP._speedP.x) + Mathf.Abs(RG2.velocity.x)) <= PP._speedP.z)
             {
                 _speedP = (Mathf.Abs(PP._speedP.x) + Mathf.Abs(RG2.velocity.x)) * Napr*DirectionPersons(Napr, PA._direction);
+                
             }
             else
             {
                 _speedP = PP._speedP.z * Napr * DirectionPersons(Napr, PA._direction);
             }
             RG2.velocity = new Vector2(_speedP, RG2.velocity.y);
+            PersonsAnimator.Play("Walk");
         }
     }
     public void StopMovementPersonsZ()//Остановка по оси Z
@@ -75,6 +79,7 @@ public class ControlPerson : MonoBehaviour
     public void StopMovementPersonsX()//Остановка по оси X
     {
         RG2.velocity = new Vector2(0, RG2.velocity.y);
+        PersonsAnimator.Play("ash_idle");
     }
     public void JumpStart()//Начинаем прыжок
     {
