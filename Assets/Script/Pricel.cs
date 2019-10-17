@@ -14,6 +14,8 @@ public class Pricel : MonoBehaviour
         PointL[0].name = "1";
         PointL[1].name = "2";
         PointL[2].name = "3";
+        //transform.GetChild(0).GetChild(0).GetChild(1).gameObject.SetActive(false);
+        //transform.GetChild(0).GetChild(0).GetChild(2).gameObject.SetActive(false);
     }
     void ChoicePoint()//определяем какая точка выше или ниже
     {
@@ -81,6 +83,20 @@ public class Pricel : MonoBehaviour
              //}
         return FF;
     }
+    void PointHeands()
+    {
+        if (transform.parent)
+        {
+            if (transform.GetChild(0).GetChild(0).childCount >1)
+            {
+                GameObject Left = transform.parent.GetChild(1).GetChild(11).GetChild(1).GetChild(0).gameObject;
+                GameObject Right = transform.parent.GetChild(1).GetChild(11).GetChild(1).GetChild(1).gameObject;
+                Left.transform.position = transform.GetChild(0).GetChild(0).GetChild(1).position;
+                Right.transform.position = transform.GetChild(0).GetChild(0).GetChild(2).position;
+            }
+        }
+    }
+
     // Update is called once per frame
     private void FixedUpdate()
     {
@@ -113,6 +129,7 @@ public class Pricel : MonoBehaviour
             }
            // GunModelText.transform.GetChild(0).position = FF.transform.position;
         }
+        PointHeands();
     }
     void Update()
     {
